@@ -1,7 +1,7 @@
 baseURL = 'https://my-blog-1tn.pages.dev/'
 locale = 'zh-cn'
 title = 'Wang的技术博客'
-theme = 'PaperMod'
+theme = 'PaperMod_new'
 paginate = 10
 
 [params]
