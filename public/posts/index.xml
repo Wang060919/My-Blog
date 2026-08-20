@@ -1,19 +1,70 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on My New Hugo Project</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on My New Hugo Project</description>
+    <title>Posts on Wang的技术博客</title>
+    <link>https://my-blog-1tn.pages.dev/posts/</link>
+    <description>Recent content in Posts on Wang的技术博客</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 20 Aug 2026 14:40:25 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 19 Aug 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="https://my-blog-1tn.pages.dev/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First Post</title>
-      <link>http://localhost:1313/posts/first-post/</link>
-      <pubDate>Thu, 20 Aug 2026 14:40:25 +0800</pubDate>
-      <guid>http://localhost:1313/posts/first-post/</guid>
-      <description></description>
+      <title>我的第一篇博客</title>
+      <link>https://my-blog-1tn.pages.dev/posts/first-post/</link>
+      <pubDate>Wed, 19 Aug 2026 10:00:00 +0800</pubDate>
+      <guid>https://my-blog-1tn.pages.dev/posts/first-post/</guid>
+      <description>&lt;h1 id=&#34;你好世界&#34;&gt;你好，世界！&lt;/h1&gt;
+&lt;p&gt;这是我用 Hugo + Cloudflare Pages 搭建的个人博客。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://my-blog-1tn.pages.dev/posts/%E5%90%8C%E4%B8%80%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%8B%E5%A6%82%E4%BD%95%E7%94%A8%E6%89%8B%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E7%94%B5%E8%84%91-docker-%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84-web-%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://my-blog-1tn.pages.dev/posts/%E5%90%8C%E4%B8%80%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%8B%E5%A6%82%E4%BD%95%E7%94%A8%E6%89%8B%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E7%94%B5%E8%84%91-docker-%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84-web-%E6%9C%8D%E5%8A%A1/</guid>
+      <description>&lt;h1 id=&#34;同一局域网下如何用手机浏览器访问电脑-docker-容器中的-web-服务&#34;&gt;同一局域网下，如何用手机浏览器访问电脑 Docker 容器中的 Web 服务？&lt;/h1&gt;
+&lt;p&gt;在本地开发、测试或折腾私有服务时，我们经常会在电脑的 Docker 中运行各种 Web 应用（例如 Web 管理面板、API 接口、基于 noVNC 的可视化桌面等）。&lt;/p&gt;
+&lt;p&gt;很多时候，我们希望直接用身边的&lt;strong&gt;手机浏览器&lt;/strong&gt;来调试或查看这些页面。本文将详细讲解访问逻辑、操作步骤以及如何避开防火墙和代理（VPN）的常见坑。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%80%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84&#34;&gt;一、核心工作原理与端口映射&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BA%8C%E7%AC%AC%E4%B8%80%E6%AD%A5%E8%8E%B7%E5%8F%96%E7%94%B5%E8%84%91%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91-ip&#34;&gt;二、第一步：获取电脑的局域网 IP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%89%E7%AC%AC%E4%BA%8C%E6%AD%A5%E6%94%BE%E8%A1%8C%E7%94%B5%E8%84%91%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3&#34;&gt;三、第二步：放行电脑防火墙端口&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%9B%9B%E7%AC%AC%E4%B8%89%E6%AD%A5%E6%89%8B%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8E%E9%AA%8C%E8%AF%81&#34;&gt;四、第三步：手机浏览器访问与验证&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BA%94%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86%E6%A2%AF%E5%AD%90vpn%E5%AF%BC%E8%87%B4%E6%89%93%E4%B8%8D%E5%BC%80%E6%80%8E%E4%B9%88%E5%8A%9E&#34;&gt;五、避坑指南：开启代理（梯子/VPN）导致打不开怎么办？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%85%AD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5faq&#34;&gt;六、常见问题排查（FAQ）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%83%E6%80%BB%E7%BB%93&#34;&gt;七、总结&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一核心工作原理与端口映射&#34;&gt;一、核心工作原理与端口映射&lt;/h2&gt;
+&lt;p&gt;手机访问电脑 Docker 的核心在于 &lt;strong&gt;端口映射（Port Mapping）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;容器与宿主机：&lt;/strong&gt; 容器有独立的内部网络。启动容器时，通过 &lt;code&gt;-p&lt;/code&gt; 宿主机端口:容器端口 把服务暴露给电脑。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;监听范围：&lt;/strong&gt; Docker 默认会将端口绑定在 &lt;code&gt;0.0.0.0&lt;/code&gt;，这意味着&lt;strong&gt;局域网内的其他设备也可以通过电脑的局域网 IP 访问该端口&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;端口作用示例&#34;&gt;端口作用示例：&lt;/h3&gt;
+&lt;p&gt;如果容器映射了以下 3 个端口：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;5900:5900&lt;/code&gt;：原生 VNC 远程桌面端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;6080:6080&lt;/code&gt;：基于网页的 noVNC 远程桌面端口&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;6657:6657&lt;/code&gt;：项目的主网页服务 / API 端口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;则访问规则为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;电脑本机访问：&lt;/strong&gt; &lt;code&gt;http://localhost:6657/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;手机局域网访问：&lt;/strong&gt; &lt;code&gt;http://&amp;lt;电脑局域网IP&amp;gt;:6657/&lt;/code&gt;（例如 &lt;code&gt;http://192.168.1.100:6657/&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;手机看图形桌面：&lt;/strong&gt; &lt;code&gt;http://&amp;lt;电脑局域网IP&amp;gt;:6080/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二第一步获取电脑的局域网-ip&#34;&gt;二、第一步：获取电脑的局域网 IP&lt;/h2&gt;
+&lt;h3 id=&#34;windows-系统&#34;&gt;Windows 系统&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;按键盘快捷键 &lt;code&gt;Win + R&lt;/code&gt;，输入 &lt;code&gt;cmd&lt;/code&gt; 并回车。&lt;/li&gt;
+&lt;li&gt;在命令行中输入：&lt;code&gt;ipconfig&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;找到你当前联网的网卡（如“无线局域网适配器 WLAN”或“以太网”），记录下 &lt;strong&gt;IPv4 地址&lt;/strong&gt;（通常形如 &lt;code&gt;192.168.1.X&lt;/code&gt; 或 &lt;code&gt;192.168.31.X&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;macos--linux-系统&#34;&gt;macOS / Linux 系统&lt;/h3&gt;
+&lt;p&gt;打开终端执行：&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
