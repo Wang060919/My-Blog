@@ -1,10 +1,10 @@
-+++
-date = '2026-08-21T13:14:46+08:00'
-draft = false
-title = 'Hugo 博客的正确 Git 提交流程'
-tags = ['Hugo', 'Git', '博客']
-categories = ['教程']
-+++
+---
+title: "Hugo 博客的正确 Git 提交流程"
+date: 2026-08-21T13:14:46+08:00
+draft: false
+tags: ["Hugo", "Git", "博客"]
+categories: ["教程"]
+---
 
 ## 前言
 
