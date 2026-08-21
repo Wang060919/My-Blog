@@ -6,5 +6,5 @@ tags: ["博客"]
 categories: ["随笔"]
 ---
 
-# 你好，世界！
+# Hello World！
 这是我用 Hugo + Cloudflare Pages 搭建的个人博客。
