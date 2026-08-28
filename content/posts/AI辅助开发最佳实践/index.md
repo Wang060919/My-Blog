@@ -69,7 +69,7 @@ categories: ["技术"]
 
 要实现"低 Token、高质量"的开发闭环，需要践行以下 4 个工程准则：
 
-```mermaid
+{{< mermaid >}}
 graph TD
     A["1. 契约先行<br/>(Type-Driven Design)"] --> |极高信息密度| B["2. 模块精简<br/>(单文件 < 150~200 行)"]
     B --> |降低单次喂入 Token| C["3. 失败断言<br/>(Failing Test First)"]
@@ -79,7 +79,7 @@ graph TD
     style B fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     style C fill:#fff3e0,stroke:#e65100,stroke-width:2px
     style D fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-```
+{{< /mermaid >}}
 
 1. **类型即最高密度的 Prompt**：100 Tokens 的严格类型接口（TypeScript Interface / Rust Struct），比 1000 字的模糊自然语言需求描述准确 10 倍。
 2. **小文件与纯函数架构**：单文件超过 300 行会极大消耗上下文并增加改错概率。将业务拆解为纯函数和专用 Hook，AI 每次只需要看 1~2 个小文件。
@@ -138,7 +138,7 @@ graph TD
 
 基于重构后的 AI 友好架构，后续任何新增功能或 Bug 修复均可严格按照以下 **SOP 循环** 进行：
 
-```mermaid
+{{< mermaid >}}
 graph LR
     A["① 需求切片与投喂<br/>(Context)"] --> B["② 契约与测试先行<br/>(Contract & Test)"]
     B --> C["③ 精准填空实现<br/>(Impl)"]
@@ -151,7 +151,7 @@ graph LR
     style C fill:#fff8e1,stroke:#f57f17,stroke-width:2px
     style D fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
     style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-```
+{{< /mermaid >}}
 
 ### 步骤 1：需求切片与精准投喂（Context Slicing）
 * **原则**：开全新会话，严禁全量投喂，仅使用 `@` 投喂最相关的 2~3 个文件。

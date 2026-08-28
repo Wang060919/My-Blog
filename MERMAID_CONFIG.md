@@ -8,11 +8,21 @@
 特点：
 - 使用CDN加载Mermaid 10版本
 - 自动检测暗色/亮色主题
-- 当用户切换主题时自动重新渲染图表
 - 自定义了配色方案以匹配博客主题
 
-### 2. 更新了 `hugo.toml` 配置
-添加了Mermaid的passthrough支持，使Hugo能够正确识别和处理mermaid代码块。
+### 2. 创建了 `layouts/shortcodes/mermaid.html`
+这是Hugo的shortcode，用于在markdown中嵌入Mermaid图表。
+
+**使用方法：**
+```markdown
+{{< mermaid >}}
+graph TD
+    A[节点1] --> B[节点2]
+{{< /mermaid >}}
+```
+
+### 3. 更新了文章中的流程图
+已将 ```mermaid 代码块改为 {{< mermaid >}} shortcode语法。
 
 ## 部署步骤
 
@@ -51,8 +61,6 @@ https://my-blog-1tn.pages.dev/posts/ai%E8%BE%85%E5%8A%A9%E5%BC%80%E5%8F%91%E6%9C
 1. 检查浏览器控制台是否有JavaScript错误
 2. 确认网络能访问 cdn.jsdelivr.net
 3. 清除浏览器缓存后重新访问
-4. 确认Hugo版本 >= 0.93.0（支持passthrough扩展）
+4. 确认文章中使用的是 `{{< mermaid >}}` shortcode语法，而不是 ```mermaid 代码块
 
 ## 自定义主题颜色
-
-如果想修改Mermaid图表的配色，编辑 `layouts/partials/extend_head.html` 中的 `themeVariables` 部分。
