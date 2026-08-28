@@ -29,3 +29,9 @@ MERMAID_FIX.md
 
 # Test files
 content/posts/mermaid-test.md
+
+# Build stats
+hugo_stats.json
+
+# Backup files
+*.backup

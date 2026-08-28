@@ -1,77 +1,116 @@
-baseURL = 'https://my-blog-1tn.pages.dev/'
-defaultContentLanguage = 'zh'
-locale = 'zh-CN'
-title = 'Wang的技术博客'
-theme = 'PaperMod'
+title = "Wang的技术博客"
+baseurl = "https://my-blog-1tn.pages.dev/"
+disableAliases = true
+disableHugoGeneratorInject = true
+# disableKinds = ["taxonomy", "term"]
+enableEmoji = true
+enableGitInfo = false
+enableRobotsTXT = true
+rssLimit = 10
+summarylength = 20 # 70 (default)
+
+# Multilingual
+defaultContentLanguage = "zh"
+disableLanguages = []
+defaultContentLanguageInSubdir = false
+
+copyRight = "Copyright (c) 2024-2026 Wang"
+
+[build.buildStats]
+  enable = true
+
+[outputs]
+  home = ["html", "rss", "sitemap", "searchIndex", "llms"]
+  page = ["html", "markdown"]
+  section = ["html", "rss", "sitemap"]
+  taxonomy = ["html", "rss", "sitemap"]
+  term = ["html", "rss", "sitemap"]
+
+[outputFormats.searchIndex]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
+
+[outputFormats.markdown]
+  baseName = "index"
+  isHTML = false
+  isPlainText = true
+  mediaType = "text/markdown"
+
+[outputFormats.llms]
+  baseName = "llms"
+  isHTML = false
+  isPlainText = true
+  mediaType = "text/plain"
+
+# Add output format for section sitemap.xml
+[outputFormats.sitemap]
+  mediaType = "application/xml"
+  baseName = "sitemap"
+  isHTML = false
+  isPlainText = true
+  noUgly = true
+  rel  = "sitemap"
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[caches]
+  [caches.getresource]
+    dir = ":cacheDir/:project"
+    maxAge = -1 # "30m"
+
+[taxonomies]
+  contributor = "contributors"
+  category = "categories"
+  tag = "tags"
+
+[permalinks]
+  blog = "/blog/:slug/"
+  docs = "/docs/:sections[1:]/:slug/"
+# docs = "/docs/1.0/:sections[1:]/:slug/"
+
+[minify.tdewolff.html]
+  keepComments = true # If set to false, build signatures are removed
+  keepWhitespace = false
 
 [pagination]
   pagerSize = 10
 
-[params]
-  env = "production"
-  description = "技术博客 | Docker | Web开发"
-  author = "Wang"
-  defaultTheme = "auto"
-  ShowReadingTime = true
-  ShowShareButtons = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowWordCount = true
-  ShowRssButtonInSectionTermList = true
-  UseHugoToc = true
-  disableSpecial1stPost = false
-  disableScrollToTop = false
-  comments = false
-  hidemeta = false
-  hideSummary = false
-  showtoc = true
-  tocopen = true
-  DateFormat = '2006年1月2日'
+[related]
+  threshold = 80
+  includeNewer = true
+  toLower = false
+    [[related.indices]]
+      name = "categories"
+      weight = 100
+    [[related.indices]]
+      name = "tags"
+      weight = 80
+    [[related.indices]]
+      name = "date"
+      weight = 10
 
-  [params.homeInfoParams]
-    Title = "你好，欢迎来到我的博客 "
-    Content = "记录技术学习与实践，分享开发经验与心得"
+[imaging]
+  anchor = "Center"
+  bgColor = "#ffffff"
+  hint = "photo"
+  quality = 85
+  resampleFilter = "Lanczos"
 
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/Wang060919"
+# Ignore deprecation warnings
+ignoreLogs = ['warning-goldmark-raw-html']
+# Use Dart Sass instead of LibSass
+[build]
+  [build.transpiler]
+    [build.transpiler.dartsass]
+      enable = true
+
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      # Existing trusted posts use <details> and <br> markup.
-      unsafe = true
-  [markup.highlight]
-    anchorLineNos = false
-    codeFences = true
-    guessSyntax = false
-    lineNos = false
-    lineNumbersInTable = false
-    noClasses = true
-    style = 'github'
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    name = "文章"
-    url = "/posts/"
-    weight = 10
-  [[menu.main]]
-    identifier = "tags"
-    name = "标签"
-    url = "/tags/"
-    weight = 20
-  [[menu.main]]
-    identifier = "archives"
-    name = "归档"
-    url = "/archives/"
-    weight = 30
-
-[outputs]
-  home = ["HTML", "RSS", "JSON"]
-
-[languages]
-  [languages.zh]
-    label = '简体中文'
-    locale = 'zh-CN'
-    weight = 1
+      unsafe = true  # Allow raw HTML in markdown

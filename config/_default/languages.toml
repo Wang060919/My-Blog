@@ -1,0 +1,10 @@
+[zh]
+  label = "简体中文"
+  locale = "zh-CN"
+  contentDir = "content"
+  weight = 10
+  [zh.params]
+    languageISO = "ZH"
+    languageTag = "zh-CN"
+    languageLabel = "简体中文"
+    footer = '由 <a class="text-muted" href="https://gohugo.io/">Hugo</a> 和 <a class="text-muted" href="https://getdoks.org/">Doks</a> 强力驱动'

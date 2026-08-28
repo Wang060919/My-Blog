@@ -1,7 +1,8 @@
 ---
 title: "Hugo 博客的正确 Git 提交流程"
-date: 2026-08-21T13:14:46+08:00
+date: 2024-08-21T13:14:46+08:00
 draft: false
+description: '详解 Hugo 博客构建与 Git 版本控制的正确流程，包括 .gitignore 配置、构建产物处理以及 Cloudflare Pages 部署最佳实践'
 tags: ["Hugo", "Git", "博客"]
 categories: ["教程"]
 ---

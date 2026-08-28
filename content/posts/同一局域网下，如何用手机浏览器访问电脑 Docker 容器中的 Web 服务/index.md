@@ -1,7 +1,8 @@
 ---
 title: "同一局域网下，如何用手机浏览器访问电脑 Docker 容器中的 Web 服务"
-date: 2026-08-20T15:30:00+08:00
+date: 2024-08-20T15:30:00+08:00
 draft: false
+description: '详细教程：如何通过端口映射、防火墙配置和内网 IP 地址，在手机浏览器中访问电脑 Docker 容器中的 Web 应用和管理面板'
 tags: ["Docker", "网络", "教程"]
 categories: ["技术"]
 ---
