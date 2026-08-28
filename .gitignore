@@ -22,3 +22,10 @@ node_modules/
 # Temporary files
 *.log
 *.tmp
+
+# Documentation files
+MERMAID_CONFIG.md
+MERMAID_FIX.md
+
+# Test files
+content/posts/mermaid-test.md
