@@ -1,0 +1,48 @@
+<!-- Mermaid Support -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  
+  // Detect theme
+  const theme = document.body.classList.contains('dark') ? 'dark' : 'default';
+  
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: theme,
+    securityLevel: 'loose',
+    themeVariables: {
+      primaryColor: '#e3f2fd',
+      primaryTextColor: '#000',
+      primaryBorderColor: '#1565c0',
+      lineColor: '#1565c0',
+      secondaryColor: '#f3e5f5',
+      tertiaryColor: '#fff8e1',
+      background: '#ffffff',
+      mainBkg: '#e3f2fd',
+      secondBkg: '#f3e5f5',
+      tertiaryBkg: '#fff8e1',
+      fontSize: '16px'
+    },
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 15
+    }
+  });
+  
+  // Re-render on theme change
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        const newTheme = document.body.classList.contains('dark') ? 'dark' : 'default';
+        mermaid.initialize({ theme: newTheme });
+        location.reload(); // Reload to apply new theme
+      }
+    });
+  });
+  
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+</script>

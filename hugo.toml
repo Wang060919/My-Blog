@@ -50,7 +50,13 @@ theme = 'PaperMod'
     lineNumbersInTable = true
     noClasses = false
     style = 'monokai'
-
+  # Enable Mermaid diagrams
+  [markup.goldmark.extensions]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [["$$", "$$"], ["```mermaid", "```"]]
+        inline = [["$", "$"]]
 [menu]
   [[menu.main]]
     identifier = "posts"
