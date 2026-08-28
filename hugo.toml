@@ -46,10 +46,10 @@ theme = 'PaperMod'
     anchorLineNos = false
     codeFences = true
     guessSyntax = false
-    lineNos = true
-    lineNumbersInTable = true
-    noClasses = false
-    style = 'monokai'
+    lineNos = false
+    lineNumbersInTable = false
+    noClasses = true
+    style = 'github'
 [menu]
   [[menu.main]]
     identifier = "posts"
