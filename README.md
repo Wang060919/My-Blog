@@ -4,7 +4,7 @@
 
 ## 技术栈
 
-- **Hugo v0.146.0+** (Extended 版本)
+- **Hugo v0.165.0+** (Extended 版本)
 - **Doks 主题** (通过 `@thulite/doks-core` npm 包)
 - **Mermaid.js** (图表支持)
 - **TailwindCSS** (样式框架)
@@ -12,7 +12,7 @@
 
 ## 本地开发
 
-需要 Hugo Extended `v0.146.0` 或更高版本，以及 Node.js `>=18.0.0`。
+需要 Hugo Extended `v0.165.0` 或更高版本，以及 Node.js `>=20.11.0`。
 
 ```bash
 # 安装依赖
@@ -40,8 +40,8 @@ npm run build
 | --- | --- |
 | 构建命令 | `npm run build` |
 | 构建输出目录 | `public` |
-| Node 版本 | `>=18.0.0` |
-| Hugo 版本 | `0.146.0` 或更高的 Extended 版本 |
+| Node 版本 | `>=20.11.0` |
+| Hugo 版本 | `0.165.0` 或更高的 Extended 版本 |
 
 ## 内容安全
 

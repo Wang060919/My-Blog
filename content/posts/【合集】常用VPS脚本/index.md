@@ -4,7 +4,7 @@ date: 2024-08-26T20:30:00+08:00
 draft: false
 tags: ["VPS", "Linux", "NodeSeek", "运维脚本", "测速跑分", "DD重装"]
 categories: ["运维技术"]
-description: "整理自 NodeSeek 社区的常用 VPS 一键脚本合集，涵盖系统 DD 重装、性能跑分、流媒体解锁检测、网络测速、路由回程与环境部署等。"
+description: "整理 VPS 系统重装、性能跑分、流媒体检测、网络测速、路由回程和环境部署等常用运维脚本。"
 ---
 
 # 【合集】常用 VPS 脚本与工具汇总

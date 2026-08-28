@@ -4,7 +4,7 @@ date: 2024-08-25T16:38:00+08:00
 draft: false
 tags: ["VPS", "云计算", "NodeSeek", "LINUX DO", "网络运维", "黑话"]
 categories: ["科普杂谈", "服务器运维"]
-description: "全面整理 NodeSeek、LINUX DO等技术论坛中关于小鸡、母鸡、甲骨文、三网回程线路（4837/9929/CN2 GIA）及 IDC 厂商外号的行业黑话与术语大全。"
+description: "整理 VPS、IDC、三网线路、CN2 GIA、4837、9929 等常见术语，帮助新手读懂主机社区和网络线路讨论。"
 ---
 
 在逛 NodeSeek、LINUX DO 等技术论坛时，常会看到“MJJ”、“母鸡/小鸡”、“传家宝”、“CN2 GIA”等让人摸不着头脑的词汇。这些黑话有些是为了避开敏感词过滤，有些则是圈内玩家自嘲、戏谑或对特定商家、线路的形象代称。

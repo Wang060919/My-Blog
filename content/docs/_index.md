@@ -1,6 +1,6 @@
 ---
-title: 欢迎
-description: 欢迎来到文档区
+title: "Docs"
+description: "整理 Hugo、Docker、Web 开发、AI 工具与服务器运维实践的技术文档，提供可复用的配置方法、部署步骤和问题排查经验。"
 weight: 1
 ---
 

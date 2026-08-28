@@ -1,10 +1,10 @@
 # Hugo
 title = "Wang的技术博客"
-description = "技术博客 | Docker | Web开发"
+description = "Wang的技术博客，分享 Hugo、Docker、Web 开发、AI 工具与服务器运维实践，记录配置、部署和问题排查经验。"
 images = ["cover.png"]
 
-# mainSections
-mainSections = ["docs"]
+# Main content sections used by Doks layout logic
+mainSections = ["docs", "posts"]
 
 # Enable mathematical rendering on every page (unless you set the `math` parameter to `false` in front matter)
 math = false # false (default) or true
@@ -25,8 +25,8 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 
   ## Button
   navBarButton = false # false (default) or true
-  navBarButtonUrl = "/docs/prologue/introduction/"
-  navBarButtonText = "Get started"
+  navBarButtonUrl = "/docs/"
+  navBarButtonText = "View docs"
 
   # FlexSearch
   flexSearch = true # true (default) or false
@@ -129,18 +129,19 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   [seo.title]
     separator = "" # "|" (default)
     suffix = "" # title hugo.toml (default)
-  [seo.description]
-    summaryFallback = "" # "" (default)
-  [seo.favicons]
-    icon = "favicon.png" # favicon.png (default)
-    svgIcon = "favicon.svg" # favicon.svg (default)
-  [seo.schemas]
-    type = "Organization" # Organization (default) or Person
-    logo = "favicon-512x512.png" # Logo of Organization — favicon-512x512.png (default)
-    name = "Thulite" # Name of Organization or Person
-    sameAs = [] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
-    images = ["cover.png"] # ["cover.png"] (default)
-    article = [] # Article sections
-    newsArticle = [] # NewsArticle sections
-    blogPosting = ["blog"] # BlogPosting sections
-    product = [] # Product sections
+[seo.description]
+  summaryFallback = true
+  siteParamsFallback = true
+[seo.favicons]
+  icon = "favicon.png"
+  svgIcon = ""
+[seo.schemas]
+  type = "Person"
+  logo = "favicon-512x512.png"
+  name = "Wang"
+  sameAs = ["https://github.com/Wang060919"]
+  images = ["cover.png"]
+  article = []
+  newsArticle = []
+  blogPosting = ["posts"]
+  product = []
