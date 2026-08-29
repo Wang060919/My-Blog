@@ -43,6 +43,8 @@ npm run build
 | Node 版本 | `>=20.11.0` |
 | Hugo 版本 | `0.165.0` 或更高的 Extended 版本 |
 
+**注意**：`npm run build` 会自动使用正确的生产环境 baseURL (`https://my-blog-1tn.pages.dev/`)。
+
 ## 内容安全
 
 `hugo.toml` 启用了 Goldmark 的 `unsafe` 渲染，以支持文章中的 `<details>` 和 `<br>`。仅应提交可信来源的 Markdown 内容。

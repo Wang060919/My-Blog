@@ -1,1 +1,181 @@
-// Put your custom SCSS code here
+// ========================================================
+// GitHub 风格代码块 (无边框 + 自动换行 + 单一右上角复制按钮)
+// ========================================================
+
+// 1. 颜色变量定义
+:root,
+:root[data-bs-theme="light"],
+[data-theme="light"] {
+  --gh-code-bg: #f6f8fa;          // GitHub 浅灰底色
+  --gh-code-fg: #1f2328;          // 主文字色
+  --gh-code-inline-bg: rgba(175, 184, 193, 0.2);
+  
+  // 复制按钮
+  --gh-btn-bg: #ffffff;
+  --gh-btn-border: #d0d7de;
+  --gh-btn-fg: #656d76;
+  --gh-btn-hover-bg: #f3f4f6;
+  --gh-btn-hover-fg: #1f2328;
+  
+  // 高亮配色
+  --gh-syn-comment: #6e7781;
+  --gh-syn-keyword: #cf222e;
+  --gh-syn-string: #0a3069;
+  --gh-syn-operator: #0550ae;
+}
+
+:root[data-bs-theme="dark"],
+[data-theme="dark"],
+.dark {
+  --gh-code-bg: #161b22;          // GitHub 深色底色
+  --gh-code-fg: #e6edf3;
+  --gh-code-inline-bg: rgba(110, 118, 129, 0.4);
+  
+  // 复制按钮
+  --gh-btn-bg: #21262d;
+  --gh-btn-border: #30363d;
+  --gh-btn-fg: #8b949e;
+  --gh-btn-hover-bg: #30363d;
+  --gh-btn-hover-fg: #c9d1d9;
+  
+  // 高亮配色
+  --gh-syn-comment: #8b949e;
+  --gh-syn-keyword: #ff7b72;
+  --gh-syn-string: #a5d6ff;
+  --gh-syn-operator: #79c0ff;
+}
+
+// 2. 隐藏主题所有原生的 Mac 栏与原生复制按钮（避免重叠）
+.expressive-code .frame {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.expressive-code .header,
+.expressive-code .frame .header,
+.expressive-code .copy,
+.expressive-code .frame .copy {
+  display: none !important; // 强制隐藏自带的重复按钮和黑条
+}
+
+// 3. 代码块主体 (无边框 + 浅灰底 + 自动换行)
+pre,
+.chroma,
+div.highlight pre,
+.expressive-code pre {
+  position: relative !important;
+  background-color: var(--gh-code-bg) !important;
+  color: var(--gh-code-fg) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+  padding: 16px !important;
+  padding-right: 48px !important;        // 避开右上角复制按钮
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  margin: 1rem 0 !important;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+
+  // 自动换行
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  overflow-x: hidden !important;
+
+  code {
+    background-color: transparent !important;
+    color: inherit !important;
+    padding: 0 !important;
+    border: none !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+.expressive-code .ec-line {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.highlight,
+div.highlight,
+figure.highlight,
+.expressive-code {
+  position: relative !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  margin: 1rem 0 !important;
+}
+
+// 4. 纯图标无外框复制按钮
+.gh-copy-btn,
+.expressive-code .copy button,
+.copy-code-button,
+.btn-copy {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 30 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  
+  // ⭐️ 核心修改：去掉外框、背景和阴影
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  
+  color: var(--gh-btn-fg) !important;
+  cursor: pointer !important;
+  opacity: 0.65 !important;               // 平时稍微淡一点
+  transition: all 0.18s ease !important;
+
+  // 鼠标移上去时图标加深高亮
+  &:hover {
+    opacity: 1 !important;
+    color: var(--gh-btn-hover-fg) !important;
+    background: transparent !important;   // 保持无背景
+    border: none !important;
+  }
+
+  // 复制成功时不加边框
+  &.copied {
+    border: none !important;
+    opacity: 1 !important;
+  }
+
+  svg {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+// 5. 行内代码
+code:not(pre code) {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+  font-size: 85% !important;
+  background-color: var(--gh-code-inline-bg) !important;
+  color: var(--gh-code-fg) !important;
+  padding: 0.2em 0.4em !important;
+  margin: 0 2px !important;
+  border-radius: 6px !important;
+  white-space: break-spaces !important;
+}
+
+// 6. Chroma 语法高亮
+.chroma {
+  * { filter: none !important; }
+  .c, .ch, .cm, .c1, .cs { color: var(--gh-syn-comment) !important; }
+  .k, .kd, .kn, .kp, .kr, .kt, .kc { color: var(--gh-syn-keyword) !important; font-weight: 500 !important; }
+  .s, .sa, .sb, .sc, .s2, .s1 { color: var(--gh-syn-string) !important; }
+  .o, .ow { color: var(--gh-syn-operator) !important; font-weight: 500 !important; }
+  .p { color: var(--gh-code-fg) !important; }
+}

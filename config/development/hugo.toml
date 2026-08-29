@@ -1,0 +1,2 @@
+# Development environment (used by hugo server)
+baseurl = "http://localhost:1313/"

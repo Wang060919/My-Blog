@@ -1,0 +1,326 @@
+/* ============================================
+   代码块样式优化 - 修复对比度问题
+   针对 Thulite Doks 主题的 Expressive Code
+   ============================================ */
+
+/* 1. 修复 Chroma 代码块的文字可见性 */
+.chroma,
+.chroma code,
+.chroma pre,
+pre.chroma,
+div.highlight pre,
+div.highlight pre code,
+pre[class*="language-"],
+pre[class*="language-"] code {
+  /* 高对比度亮色文字 - 覆盖 inherit */
+  color: #e6edf3 !important;
+  background-color: #1e1e1e !important;
+}
+
+/* 2. 修复 Expressive Code 的文字颜色 */
+.expressive-code pre,
+.expressive-code pre code,
+.expressive-code .ec-line,
+.expressive-code .ec-line * {
+  /* 使用 CSS 变量确保颜色正确 */
+  color: var(--ec-codeFg, #e6edf3) !important;
+}
+
+/* 3. 强制覆盖主题的 color: inherit */
+code:not(:where(.not-content *)) {
+  color: #e6edf3 !important;
+  background-color: rgba(175, 184, 193, 0.2) !important;
+}
+
+/* 4. 暗色主题下的代码块优化 */
+:root,
+:root[data-bs-theme="dark"] {
+  /* Expressive Code 变量覆盖 */
+  --ec-codeBg: #1e1e1e !important;
+  --ec-codeFg: #e6edf3 !important;
+  
+  /* Chroma/通用变量 */
+  --sl-color-text: #e6edf3 !important;
+}
+
+/* 5. 代码块内所有语法高亮元素 */
+.chroma .k,   /* 关键字 */
+.chroma .kc,  /* 常量关键字 */
+.chroma .kd,  /* 声明关键字 */
+.chroma .kn,  /* 命名空间 */
+.chroma .kp,  /* 伪关键字 */
+.chroma .kr,  /* 保留字 */
+.chroma .kt,  /* 类型 */
+.chroma .n,   /* 名称 */
+.chroma .na,  /* 属性名 */
+.chroma .nb,  /* 内置名称 */
+.chroma .nc,  /* 类名 */
+.chroma .no,  /* 常量 */
+.chroma .nd,  /* 装饰器 */
+.chroma .ni,  /* 实体 */
+.chroma .ne,  /* 异常 */
+.chroma .nf,  /* 函数 */
+.chroma .nl,  /* 标签 */
+.chroma .nn,  /* 命名空间 */
+.chroma .nx,  /* 其他 */
+.chroma .py,  /* 属性 */
+.chroma .nt,  /* 标签 */
+.chroma .nv,  /* 变量 */
+.chroma .s,   /* 字符串 */
+.chroma .sa,  /* 属性字符串 */
+.chroma .sb,  /* 反引号字符串 */
+.chroma .sc,  /* 字符 */
+.chroma .dl,  /* 分隔符 */
+.chroma .sd,  /* 文档字符串 */
+.chroma .s2,  /* 双引号字符串 */
+.chroma .se,  /* 转义序列 */
+.chroma .sh,  /* heredoc */
+.chroma .si,  /* 插值 */
+.chroma .sx,  /* 其他字符串 */
+.chroma .sr,  /* 正则 */
+.chroma .s1,  /* 单引号字符串 */
+.chroma .ss,  /* 符号 */
+.chroma .m,   /* 数字 */
+.chroma .mb,  /* 二进制 */
+.chroma .mf,  /* 浮点数 */
+.chroma .mh,  /* 十六进制 */
+.chroma .mi,  /* 整数 */
+.chroma .il,  /* 长整数 */
+.chroma .mo,  /* 八进制 */
+.chroma .o,   /* 操作符 */
+.chroma .ow,  /* 单词操作符 */
+.chroma .p,   /* 标点 */
+.chroma .c,   /* 注释 */
+.chroma .ch,  /* hashbang */
+.chroma .cm,  /* 多行注释 */
+.chroma .c1,  /* 单行注释 */
+.chroma .cs,  /* 特殊注释 */
+.chroma .cp,  /* 预处理 */
+.chroma .cpf, /* 预处理文件 */
+.chroma .gd,  /* 删除 */
+.chroma .ge,  /* 强调 */
+.chroma .gr,  /* 错误 */
+.chroma .gh,  /* 标题 */
+.chroma .gi,  /* 插入 */
+.chroma .go,  /* 输出 */
+.chroma .gp,  /* 提示 */
+.chroma .gs,  /* 强 */
+.chroma .gu,  /* 子标题 */
+.chroma .gt,  /* 回溯 */
+.chroma .gl,  /* 行号 */
+.chroma .w    /* 空白 */ {
+  /* 增加亮度和对比度 */
+  filter: brightness(1.5) contrast(1.2) !important;
+  opacity: 1 !important;
+}
+
+/* 6. 特定语法元素的颜色优化 */
+.chroma .k,
+.chroma .kd,
+.chroma .kn {
+  color: #ff79c6 !important; /* 粉色 - 关键字 */
+}
+
+.chroma .s,
+.chroma .s2,
+.chroma .s1 {
+  color: #a5d6ff !important; /* 亮蓝色 - 字符串 */
+}
+
+.chroma .nf {
+  color: #7ee787 !important; /* 亮绿色 - 函数 */
+}
+
+.chroma .c,
+.chroma .c1,
+.chroma .cm {
+  color: #8b949e !important; /* 灰色 - 注释 */
+}
+
+.chroma .m,
+.chroma .mi,
+.chroma .mf {
+  color: #ffa657 !important; /* 橙色 - 数字 */
+}
+
+/* 7. 代码块边框和圆角优化 */
+.chroma,
+pre.chroma,
+div.highlight pre,
+.highlight > .chroma,
+.expressive-code pre {
+  border-radius: 8px !important;
+  border: 1px solid #3d3d3d !important;
+  padding: 16px !important;
+  line-height: 1.6 !important;
+  overflow-x: auto !important;
+}
+
+/* 8. 行内代码优化 */
+code:not(pre code) {
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.9em !important;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace !important;
+}
+
+/* 9. 浅色主题下的样式（参考 GitHub） */
+@media (prefers-color-scheme: light) {
+  :root:not([data-bs-theme="dark"]) {
+    --ec-codeBg: #f6f8fa !important;
+    --ec-codeFg: #24292e !important;
+    --sl-color-text: #24292e !important;
+  }
+  
+  :root:not([data-bs-theme="dark"]) .chroma,
+  :root:not([data-bs-theme="dark"]) .chroma code,
+  :root:not([data-bs-theme="dark"]) code:not(:where(.not-content *)) {
+    color: #24292e !important;
+    background-color: #f6f8fa !important;
+  }
+  
+  :root:not([data-bs-theme="dark"]) pre,
+  :root:not([data-bs-theme="dark"]) .expressive-code pre {
+    background-color: #f6f8fa !important;
+    border-color: #d0d7de !important;
+  }
+}
+
+/* 10. 显式浅色主题 */
+:root[data-bs-theme="light"] {
+  --ec-codeBg: #f6f8fa !important;
+  --ec-codeFg: #24292e !important;
+  --sl-color-text: #24292e !important;
+}
+
+:root[data-bs-theme="light"] .chroma,
+:root[data-bs-theme="light"] .chroma code,
+:root[data-bs-theme="light"] code:not(:where(.not-content *)),
+.expressive-code[data-bs-theme="light"] pre code {
+  color: #24292e !important;
+  background-color: #f6f8fa !important;
+}
+
+:root[data-bs-theme="light"] pre,
+:root[data-bs-theme="light"] .expressive-code pre {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+}
+
+/* 11. 复制按钮优化（GitHub 绿色） */
+.expressive-code .copy button,
+.code-toolbar .toolbar-item button,
+.copy-code-button {
+  background-color: #238636 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.expressive-code .copy button:hover,
+.code-toolbar .toolbar-item button:hover,
+.copy-code-button:hover {
+  background-color: #2ea043 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 12. 终端窗口样式（macOS 风格） */
+.expressive-code .frame.is-terminal .header {
+  background-color: #323232 !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.expressive-code .frame.is-terminal .header::before {
+  /* macOS 三个圆点 */
+  opacity: 1 !important;
+}
+
+/* 13. 代码块阴影效果 */
+.highlight,
+div.highlight,
+figure.highlight,
+.expressive-code {
+  margin: 1.5em 0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 14. 滚动条美化 */
+.chroma::-webkit-scrollbar,
+pre::-webkit-scrollbar,
+.expressive-code pre::-webkit-scrollbar {
+  height: 8px !important;
+  background-color: #2d2d2d !important;
+}
+
+.chroma::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb,
+.expressive-code pre::-webkit-scrollbar-thumb {
+  background-color: #555555 !important;
+  border-radius: 4px !important;
+}
+
+.chroma::-webkit-scrollbar-thumb:hover,
+pre::-webkit-scrollbar-thumb:hover,
+.expressive-code pre::-webkit-scrollbar-thumb:hover {
+  background-color: #666666 !important;
+}
+
+/* 15. 行号样式 */
+.chroma .ln,
+.chroma .lnt {
+  color: #6e7681 !important;
+  padding-right: 12px !important;
+  user-select: none !important;
+}
+
+/* 16. 高亮行样式 */
+.chroma .hl,
+.expressive-code .ec-line.mark {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-left: 3px solid #ff79c6 !important;
+  padding-left: 13px !important;
+  margin-left: -16px !important;
+}
+
+/* 17. 强制深色模式下的可见性 */
+.dark pre,
+.dark .chroma,
+.dark code,
+[data-theme="dark"] pre,
+[data-theme="dark"] .chroma,
+[data-theme="dark"] code,
+[data-bs-theme="dark"] pre,
+[data-bs-theme="dark"] .chroma,
+[data-bs-theme="dark"] code {
+  color: #e6edf3 !important;
+}
+
+/* 18. 确保所有容器下的代码块都有正确的颜色 */
+article pre,
+.content pre,
+.post-content pre,
+main pre {
+  background-color: #1e1e1e !important;
+  color: #e6edf3 !important;
+}
+
+/* 19. 打印样式优化 */
+@media print {
+  .chroma,
+  pre,
+  .expressive-code pre {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #000000 !important;
+  }
+  
+  code {
+    color: #000000 !important;
+  }
+}

@@ -1,6 +1,6 @@
 ---
 title: '从"给 AI 打杂"到"十倍效能"：顶尖工程师的 AI 辅助研发与架构重构实战'
-date: 2024-08-28T13:00:00+08:00
+date: 2026-08-28T13:00:00+08:00
 draft: false
 description: '系统复盘如何借助现代化 CLI Agent 工具、契约先行与 AI 友好架构，将跨端桌面项目重构成高质量、可自愈的现代化工程'
 tags: ["AI", "软件工程", "架构设计", "最佳实践", "工程效能"]
@@ -14,11 +14,11 @@ categories: ["技术"]
 ---
 
 ## 目录
-1. [认知重塑：真正的大佬究竟如何用 AI 做项目？](#一认知重塑真正的大佬究竟如何用-ai-做项目)
-2. [武器进化：为什么终端 CLI/TUI 是 AI 编程的最佳载体？](#二武器进化为什么终端-clitui-是-ai-编程的最佳载体)
-3. [核心方法论：如何用更少的 Token 做出更高质量的工程？](#三核心方法论如何用更少的-token-做出更高质量的工程)
-4. [实战案例：VanishTrans 跨端项目"AI 友好型"四阶段重构](#四实战案例vanishtrans-跨端项目ai-友好型四阶段重构)
-5. [未来可复用：AI 辅助开发五步闭环标准工作流（SOP）](#五未来可复用ai-辅助开发五步闭环标准工作流sop)
+1. [认知重塑：真正的大佬究竟如何用 AI 做项目？](#一-认知重塑真正的大佬究竟如何用-ai-做项目)
+2. [武器进化：为什么终端 CLI/TUI 是 AI 编程的最佳载体？](#二-武器进化为什么终端-clitui-是-ai-编程的最佳载体)
+3. [核心方法论：如何用更少的 Token 做出更高质量的工程？](#三-核心方法论如何用更少的-token-做出更高质量的工程)
+4. [实战案例：VanishTrans 跨端项目"AI 友好型"四阶段重构](#四-实战案例vanishtrans-跨端项目ai-友好型四阶段重构)
+5. [未来可复用：AI 辅助开发五步闭环标准工作流（SOP）](#五-未来可复用ai-辅助开发五步闭环标准工作流sop)
 
 ---
 
@@ -70,7 +70,7 @@ categories: ["技术"]
 
 要实现"低 Token、高质量"的开发闭环，需要践行以下 4 个工程准则：
 
-{{< mermaid >}}
+```mermaid
 graph TD
     A["1. 契约先行<br/>(Type-Driven Design)"] --> |极高信息密度| B["2. 模块精简<br/>(单文件 < 150~200 行)"]
     B --> |降低单次喂入 Token| C["3. 失败断言<br/>(Failing Test First)"]
@@ -80,7 +80,7 @@ graph TD
     style B fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     style C fill:#fff3e0,stroke:#e65100,stroke-width:2px
     style D fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-{{< /mermaid >}}
+```
 
 1. **类型即最高密度的 Prompt**：100 Tokens 的严格类型接口（TypeScript Interface / Rust Struct），比 1000 字的模糊自然语言需求描述准确 10 倍。
 2. **小文件与纯函数架构**：单文件超过 300 行会极大消耗上下文并增加改错概率。将业务拆解为纯函数和专用 Hook，AI 每次只需要看 1~2 个小文件。
@@ -139,12 +139,12 @@ graph TD
 
 基于重构后的 AI 友好架构，后续任何新增功能或 Bug 修复均可严格按照以下 **SOP 循环** 进行：
 
-{{< mermaid >}}
+```mermaid
 graph LR
-    A["① 需求切片与投喂<br/>(Context)"] --> B["② 契约与测试先行<br/>(Contract & Test)"]
+    A["① 需求切片与投喂<br/>(Context)"] --> B["② 契约与测试先行<br/>(Contract and Test)"]
     B --> C["③ 精准填空实现<br/>(Impl)"]
     C --> D["④ 闭环自动化验证<br/>(Verify)"]
-    D --> E["⑤ Diff 审查与同步<br/>(Commit & Sync)"]
+    D --> E["⑤ Diff 审查与同步<br/>(Commit and Sync)"]
     E --> A
     
     style A fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
@@ -152,7 +152,7 @@ graph LR
     style C fill:#fff8e1,stroke:#f57f17,stroke-width:2px
     style D fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
     style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-{{< /mermaid >}}
+```
 
 ### 步骤 1：需求切片与精准投喂（Context Slicing）
 * **原则**：开全新会话，严禁全量投喂，仅使用 `@` 投喂最相关的 2~3 个文件。

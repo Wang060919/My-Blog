@@ -7,7 +7,7 @@
     <div class="col-lg-9 col-xl-8 text-center">
       <p class="lead">{{ site.Params.description }}</p>
       <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-        <a class="btn btn-primary btn-cta rounded-pill btn-lg" href="{{ "posts/" | relURL }}" role="button">Read blog</a>
+        <a class="btn btn-primary btn-cta rounded-pill btn-lg" href="{{ "blog/" | relURL }}" role="button">Read blog</a>
         <a class="btn btn-outline-primary rounded-pill btn-lg" href="{{ "docs/" | relURL }}" role="button">View docs</a>
       </div>
       {{ .Content }}
@@ -22,6 +22,30 @@
     <div class="bg-dots"></div>
   </div>
   {{ end -}}
+
+  <!-- 2. 下半部分  -->
+  <section class="section section-md section-features">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-5 mb-4">
+          <h2 class="h4">🐳 DevOps & Scripts</h2>
+          <p class="text-muted">VPS optimization scripts, Docker containerization, deployment, and system troubleshooting practices.</p>
+        </div>
+        <div class="col-lg-5 mb-4">
+          <h2 class="h4">💻 Web Engineering</h2>
+          <p class="text-muted">Full-stack web development notes, modern frontend frameworks, and Hugo static site optimization.</p>
+        </div>
+        <div class="col-lg-5 mb-4">
+          <h2 class="h4">🤖 AI & Productivity</h2>
+          <p class="text-muted">Hands-on experience with LLMs, AI coding assistants, and modern developer workflows.</p>
+        </div>
+        <div class="col-lg-5 mb-4">
+          <h2 class="h4">📚 Read the Docs</h2>
+          <p class="text-muted">Learn more, explore guides, and browse project references in the <a href="/docs/">Docs</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 {{ end }}
 
 {{ define "sidebar-footer" }}

@@ -5,9 +5,16 @@
   translation: "下一页"
 
 - id: read_time
-  translation:
-    one: "1 分钟"
-    other: "{{ .Count }} 分钟"
+  translation: "min"
+
+- id: reading_time
+  translation: "min"
+
+- id: minute
+  translation: "min"
+
+- id: minutes
+  translation: "min"
 
 - id: words
   translation:

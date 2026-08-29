@@ -4,7 +4,7 @@ description = "Wang的技术博客，分享 Hugo、Docker、Web 开发、AI 工�
 images = ["cover.png"]
 
 # Main content sections used by Doks layout logic
-mainSections = ["docs", "posts"]
+mainSections = ["docs", "blog"]
 
 # Enable mathematical rendering on every page (unless you set the `math` parameter to `false` in front matter)
 math = false # false (default) or true
@@ -50,8 +50,8 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   # Nav
   sectionSwitcher = false # true or false (default)
   sectionNav = ["docs"] # ["docs"] (default) or list of sections (e.g. ["docs", "guides"])
-  toTopButton = false # false (default) or true
-  breadcrumbTrail = false # false (default) or true
+  toTopButton = true # false (default) or true
+  breadcrumbTrail = true # false (default) or true
   headlineHash = true # true (default) or false
   scrollSpy = true # true (default) or false
 
@@ -72,13 +72,13 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   sectionFooter = false # false (default) or true
 
   # Blog
-  relatedPosts = false # false (default) or true
+  relatedPosts = true # false (default) or true
   imageList = true # true (default) or false
   imageSingle = true # true (default) or false
 
   # Repository
-  editPage = false # false (default) or true
-  lastMod = false # false (default) or true
+  editPage = true # false (default) or true
+  lastMod = true # false (default) or true
   repoHost = "GitHub" # GitHub (default), Gitea, GitLab, Bitbucket, or BitbucketServer
   docsRepo = "https://github.com/Wang060919/my-blog"
   docsRepoBranch = "main" # main (default), master, or <branch name>
@@ -127,7 +127,7 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 # SEO (@thulite/seo)
 [seo]
   [seo.title]
-    separator = "" # "|" (default)
+    separator = "|" # "|" (default)
     suffix = "" # title hugo.toml (default)
 [seo.description]
   summaryFallback = true

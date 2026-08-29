@@ -1,0 +1,2 @@
+# Production environment (used by hugo build)
+baseurl = "https://my-blog-1tn.pages.dev/"

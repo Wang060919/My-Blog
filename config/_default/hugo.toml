@@ -1,5 +1,5 @@
-title = "Wang的技术博客"
-baseurl = "https://my-blog-1tn.pages.dev/"
+title = "Wang"
+baseurl = "/"
 disableAliases = true
 disableHugoGeneratorInject = true
 # disableKinds = ["taxonomy", "term"]
@@ -103,7 +103,7 @@ copyRight = "Copyright (c) 2024-2026 Wang"
 
 # Ignore deprecation warnings
 ignoreLogs = ['warning-goldmark-raw-html']
-# Use Dart Sass instead of LibSass
+# Use Dart Sass (已安装)
 [build]
   [build.transpiler]
     [build.transpiler.dartsass]
