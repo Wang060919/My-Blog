@@ -50,6 +50,8 @@ const purgecss = purgeCSSPlugin({
         'not-content',
         'copy',
         'btn-copy',
+        'gh-copy-btn', // custom.js: dynamically created copy button
+        'copied', // custom.js: copy success state
     ]
 });
 
