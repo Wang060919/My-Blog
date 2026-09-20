@@ -11,6 +11,7 @@ summarylength = 20 # 70 (default)
 
 # Multilingual
 defaultContentLanguage = "zh"
+hasCJKLanguage = true
 disableLanguages = []
 defaultContentLanguageInSubdir = false
 
@@ -97,9 +98,16 @@ copyRight = "Copyright (c) 2024-2026 Wang"
 [imaging]
   anchor = "Center"
   bgColor = "#ffffff"
-  hint = "photo"
-  quality = 85
   resampleFilter = "Lanczos"
+  # Hugo v0.163.0 起 quality/hint 需按格式配置
+  [imaging.jpeg]
+    quality = 85
+  [imaging.webp]
+    quality = 85
+    hint = "photo"
+  [imaging.avif]
+    quality = 85
+    hint = "photo"
 
 # Ignore deprecation warnings
 ignoreLogs = ['warning-goldmark-raw-html']

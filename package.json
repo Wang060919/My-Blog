@@ -5,9 +5,9 @@
   "author": "Wang",
   "license": "MIT",
   "scripts": {
-    "dev": "hugo server --disableFastRender --noHTTPCache",
-    "build": "hugo --minify --gc",
-    "preview": "hugo server --navigateToChanged"
+    "dev": "node scripts/hugo-runner.js server --disableFastRender --noHTTPCache",
+    "build": "node scripts/hugo-runner.js --minify --gc",
+    "preview": "node scripts/hugo-runner.js server --navigateToChanged"
   },
   "dependencies": {
     "@tabler/icons": "^3.36.1",
