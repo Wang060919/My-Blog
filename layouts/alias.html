@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- $target := urls.Parse .Permalink }}
+    <meta http-equiv="refresh" content="0; url={{ $target.RequestURI }}">
+    <title>{{ .Page.Title }}</title>
+  </head>
+  <body><a href="{{ $target.RequestURI }}">继续访问</a></body>
+</html>

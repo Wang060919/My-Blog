@@ -14,19 +14,14 @@
   {{- else if in (slice "svg") .MediaType.SubType }}
     {{- warnf "[Thulite SEO] the assets/%s isn't resizable." $faviconName }}
   {{- else }}
-    {{/* favicon.ico */}}
-    {{- $ico := $favicon.Resize "32x32" }}
-    {{- $ico = $ico.Content | resources.FromString "/favicon.ico" }}
-    <link rel="icon" href="{{ $ico.RelPermalink }}" sizes="32x32">
-    {{/* SVG favicon */}}
-    {{- with $svgIco }}
-      {{- $svg := . | resources.Copy ("/favicon.svg" | relURL) }}
-      <link rel="icon" href="{{ $svg.RelPermalink }}" {{ .MediaType.Type | printf "type=%q" | safeHTMLAttr }}>
-    {{- end }}
+    {{/* The source is a wide image; crop its padded center before resizing. */}}
+    {{- $favicon = $favicon.Crop "256x256 Center" }}
+    {{- $png := $favicon.Resize "32x32" | resources.Fingerprint }}
+    <link rel="icon" href="{{ $png.RelPermalink }}" sizes="32x32" type="image/png">
     {{/* other favicons */}}
     {{- range $sizes}}
-      {{- $iconName := printf "/favicon-%s" .size }}
-      {{- with .rel }}{{ $iconName = . }}{{ end }}
+      {{- $iconName := printf "/favicon-square-%s" .size }}
+      {{- with .rel }}{{ $iconName = printf "%s-square" . }}{{ end }}
       {{- $img := $favicon.Resize .size | resources.Copy (printf "%s%s" $iconName (path.Ext $favicon.Name) | relURL)  }}
       <link
         rel="{{ default `icon` .rel }}"
@@ -34,6 +29,10 @@
         sizes="{{ .size }}"
         type="{{ $img.MediaType }}"
       >
+    {{- end }}
+    {{- with $svgIco }}
+      {{- $svg := . | resources.Fingerprint }}
+      <link rel="icon" href="{{ $svg.RelPermalink }}" sizes="any" type="image/svg+xml">
     {{- end }}
   {{- end }}
 {{- else }}
@@ -47,12 +46,12 @@
   "lang": "{{ site.Language.Params.languageTag | default "en-us" }}",
   "icons": [
     {
-      "src": "/favicon-192x192.png",
+      "src": "/favicon-square-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicon-512x512.png",
+      "src": "/favicon-square-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

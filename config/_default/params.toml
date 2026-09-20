@@ -134,7 +134,7 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   siteParamsFallback = true
 [seo.favicons]
   icon = "favicon.png"
-  svgIcon = ""
+  svgIcon = "icon.svg"
 [seo.schemas]
   type = "Person"
   logo = "favicon-512x512.png"
