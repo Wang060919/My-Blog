@@ -1,5 +1,6 @@
 ---
 title: "王煜全：AI泡沫将在2029年破裂"
+slug: wang-yuquan-ai-bubble-2029
 date: 2026-08-22T10:00:00+08:00
 draft: false
 description: '王煜全对 AI 发展趋势的深度解读：为什么 AI 泡沫可能在2029年破裂，以及与汽车、电力等历史技术革命的平行对比分析'
@@ -9,8 +10,6 @@ categories: ["王煜全"]
 
 > 来源：[timebank.space](https://timebank.space/archives/ai-bubble-2029-ford-moment)
 > 原视频：[抖音-易论AI](https://v.douyin.com/oz6-b-Z_Gyk/)
-
-# 王煜全：AI泡沫将在2029年破裂
 
 先说一个会让很多人不舒服的判断：这一轮 AI 的二级市场，很可能在 2029 年前后掉下来一次。
 

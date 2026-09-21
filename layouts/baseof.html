@@ -1,3 +1,4 @@
+{{/* Doks override: use languageTag and IsBranch for current Hugo compatibility. */}}
 <!doctype html>
 <html lang="{{ .Site.Language.Params.languageTag | default "en" }}" data-bs-theme="{{ site.Params.doks.colorMode | default "auto" }}">
   {{ partial "head/head" . }}

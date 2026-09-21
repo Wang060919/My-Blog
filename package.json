@@ -5,9 +5,11 @@
   "author": "Wang",
   "license": "MIT",
   "scripts": {
-    "dev": "node scripts/hugo-runner.js server --disableFastRender --noHTTPCache",
-    "build": "node scripts/hugo-runner.js --minify --gc",
-    "preview": "node scripts/hugo-runner.js server --navigateToChanged"
+    "dev": "node scripts/hugo-runner.js server --disableFastRender --noHTTPCache --destination .dev-public",
+    "build": "node scripts/hugo-runner.js --environment production --minify --gc --cleanDestinationDir",
+    "preview": "node scripts/hugo-runner.js server --environment production --navigateToChanged --destination .dev-public",
+    "check": "node scripts/health-check.js",
+    "verify": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@tabler/icons": "^3.36.1",
@@ -21,6 +23,11 @@
     "node": ">=20.11.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "7.29.7",
+    "@fullhuman/postcss-purgecss": "8.0.0",
+    "autoprefixer": "10.5.4",
+    "postcss": "8.5.26",
+    "postcss-cli": "11.0.1",
     "sass-embedded": "^1.103.1"
   }
 }

@@ -1,5 +1,6 @@
 ---
 title: "【合集】常用 VPS 脚本与实用运维工具汇总"
+slug: common-vps-scripts-collection
 date: 2026-08-26T20:30:00+08:00
 draft: false
 tags: ["VPS", "Linux", "NodeSeek", "运维脚本", "测速跑分", "DD重装"]

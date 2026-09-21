@@ -1,10 +1,12 @@
 {
- "compilerOptions": {
-  "paths": {
-   "*": [
-    "..\\node_modules\\@thulite\\doks-core\\assets\\*",
-    "..\\themes\\doks\\assets\\*"
-   ]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./*",
+        "../node_modules/@thulite/doks-core/assets/*",
+        "../node_modules/@thulite/core/assets/*"
+      ]
+    }
   }
- }
 }

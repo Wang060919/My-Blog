@@ -18,7 +18,7 @@
 2. 进入 Web Analytics 页面
 3. 添加站点：`https://my-blog-1tn.pages.dev`
 4. 获取 JavaScript snippet
-5. 在 `layouts/partials/head/custom.html` 中添加代码：
+5. 在 `layouts/_partials/head/custom-head.html` 中添加代码：
 
 ```html
 <!-- Cloudflare Web Analytics -->
@@ -51,7 +51,7 @@ googleAnalytics = "G-XXXXXXXXXX"
 
 1. 注册 Plausible 账户（付费服务，或自托管）
 2. 添加域名
-3. 在 `layouts/partials/head/custom.html` 中添加：
+3. 在 `layouts/_partials/head/custom-head.html` 中添加：
 
 ```html
 <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
@@ -65,7 +65,7 @@ googleAnalytics = "G-XXXXXXXXXX"
 
 ## 当前状态
 
-- ❌ 未配置任何 Analytics
+- 仓库未手动配置 Analytics；Cloudflare 控制台是否自动注入需单独核对
 - ✅ 已准备好添加配置的文件结构
 
 ## 后续操作

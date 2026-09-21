@@ -1,5 +1,6 @@
 ---
 title: "VPS 玩家与 IDC 行业黑话完全指南（从“小鸡”到“三网线路”）"
+slug: vps-idc-industry-slang-guide
 date: 2026-08-25T16:38:00+08:00
 draft: false
 tags: ["VPS", "云计算", "NodeSeek", "LINUX DO", "网络运维", "黑话"]

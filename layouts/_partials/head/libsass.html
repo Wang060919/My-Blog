@@ -1,3 +1,4 @@
+{{/* Doks override: Dart Sass and production PostCSS. PostProcess waits for buildStats; keep this ordering for clean builds. */}}
 {{ $css := "" }}
 {{ if eq (hugo.Environment) "development" -}}
   {{ $options := (dict "targetPath" "main.css" "transpiler" "dartsass" "enableSourceMap" true "silenceDeprecations" (slice "import" "if-function" "global-builtin" "color-functions") "includePaths" (slice "node_modules")) -}}

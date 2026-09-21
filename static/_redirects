@@ -1,0 +1,17 @@
+# Legacy article URLs: Cloudflare Pages HTTP 301 redirects.
+/blog/我的第一篇博客/ /blog/first-blog-post/ 301
+/blog/我的第一篇博客 /blog/first-blog-post/ 301
+/blog/同一局域网下如何用手机浏览器访问电脑-docker-容器中的-web-服务/ /blog/access-docker-web-service-from-phone-on-lan/ 301
+/blog/同一局域网下如何用手机浏览器访问电脑-docker-容器中的-web-服务 /blog/access-docker-web-service-from-phone-on-lan/ 301
+/blog/合集常用-vps-脚本与实用运维工具汇总/ /blog/common-vps-scripts-collection/ 301
+/blog/合集常用-vps-脚本与实用运维工具汇总 /blog/common-vps-scripts-collection/ 301
+/blog/hugo-博客的正确-git-提交流程/ /blog/hugo-and-git-workflow/ 301
+/blog/hugo-博客的正确-git-提交流程 /blog/hugo-and-git-workflow/ 301
+/blog/vps-玩家与-idc-行业黑话完全指南从小鸡到三网线路/ /blog/vps-idc-industry-slang-guide/ 301
+/blog/vps-玩家与-idc-行业黑话完全指南从小鸡到三网线路 /blog/vps-idc-industry-slang-guide/ 301
+/blog/从给-ai-打杂到十倍效能顶尖工程师的-ai-辅助研发与架构重构实战/ /blog/ai-assisted-development-best-practices/ 301
+/blog/从给-ai-打杂到十倍效能顶尖工程师的-ai-辅助研发与架构重构实战 /blog/ai-assisted-development-best-practices/ 301
+/blog/王煜全ai泡沫将在2029年破裂/ /blog/wang-yuquan-ai-bubble-2029/ 301
+/blog/王煜全ai泡沫将在2029年破裂 /blog/wang-yuquan-ai-bubble-2029/ 301
+/blog/转载个人-0-成本申请软件著作权软著完整指南与踩坑记录/ /blog/zero-cost-software-copyright-application-guide/ 301
+/blog/转载个人-0-成本申请软件著作权软著完整指南与踩坑记录 /blog/zero-cost-software-copyright-application-guide/ 301

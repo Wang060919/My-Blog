@@ -1,3 +1,4 @@
+{{/* Doks override: contributors is optional; guard len before computing the last index. */}}
 {{- $last := 0 -}}
 {{- if .Params.contributors -}}
   {{- $last = sub (len .Params.contributors) 1 -}}

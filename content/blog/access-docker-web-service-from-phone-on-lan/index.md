@@ -1,13 +1,12 @@
 ---
 title: "同一局域网下，如何用手机浏览器访问电脑 Docker 容器中的 Web 服务"
+slug: access-docker-web-service-from-phone-on-lan
 date: 2026-08-20T15:30:00+08:00
 draft: false
 description: '详细教程：如何通过端口映射、防火墙配置和内网 IP 地址，在手机浏览器中访问电脑 Docker 容器中的 Web 应用和管理面板'
 tags: ["Docker", "网络", "教程"]
 categories: ["技术"]
 ---
-# 同一局域网下，如何用手机浏览器访问电脑 Docker 容器中的 Web 服务？
-
 当我们在docker中部署了web应用(例如web 管理面板, api接口, 基于noVNC的可视化桌面等)时想用手机浏览器访问这些页面, 那此时就要通过以下操作来使手机可以访问web应用
 
 ---

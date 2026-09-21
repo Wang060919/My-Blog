@@ -23,15 +23,14 @@ node_modules/
 *.log
 *.tmp
 
-# Documentation files
-MERMAID_CONFIG.md
-MERMAID_FIX.md
-
-# Test files
-content/posts/mermaid-test.md
-
 # Build stats
 hugo_stats.json
 
 # Backup files
 *.backup
+
+# Local tools and development output
+.workbuddy-ai/
+.wrangler/
+.dev-public/
+.npmrc

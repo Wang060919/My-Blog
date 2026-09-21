@@ -1,5 +1,6 @@
 ---
 title: "【转载】个人 0 成本申请软件著作权（软著）完整指南与踩坑记录"
+slug: zero-cost-software-copyright-application-guide
 date: 2026-08-25T23:30:00+08:00
 draft: false
 description: "介绍个人免费申请软件著作权的材料准备、在线填报、审查周期和常见问题，整理自 LinuxDo 社区经验。"
