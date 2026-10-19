@@ -1,0 +1,97 @@
+// Neutral charcoal across the site; project color stays local to the artwork.
+:root[data-bs-theme="dark"] {
+  // Doks has a more specific body rule than .personal-site. Bridge both token sets.
+  --bs-body-bg: var(--paper);
+  --bs-body-color: var(--ink);
+  --bs-heading-color: var(--ink);
+  --bs-emphasis-color: var(--ink);
+  --bs-secondary-color: var(--muted);
+  --bs-border-color: var(--line);
+  --bs-tertiary-bg: var(--surface);
+  --bs-link-color: var(--accent);
+  --scene-stroke: #a2b2ba;
+  --scene-fill: #252b30;
+  --scene-blue: #57778e;
+  --footer-surface: #1a1d21;
+  --wave-silver: #648eaf;
+  --wave-haze: #1f2d3a;
+  --wave-back: #29465d;
+  --wave-blue: #3f769f;
+  --wave-deep: #223c53;
+  --wave-thread: #82b5df;
+
+  body.personal-site { background: var(--paper); color: var(--ink); }
+  .personal-site {
+    .desktop-nav a { color: #bdc5cc; &:hover, &[aria-current] { color: var(--accent); } }
+    .header-tools .icon-button { color: #d0d7dc; &:hover { color: var(--accent); } }
+    .hero-description { color: #bdc5cd; }
+    .button-outline { border-color: #778b9c; background: color-mix(in srgb,var(--paper) 86%,transparent); }
+    .mobile-nav nav,.search-dialog { background: #1d2228; border-color: #4c5965; }
+    .search-results a[data-selected] { background: #293844; outline: 1px solid #6988a0; }
+    .mobile-toc { background: #1c2026; }
+
+    // Keep the existing texture, geometry and animation. Suppress its broad pale haze.
+    .wave-texture-main { filter: brightness(.58) contrast(1.5) saturate(1.15); opacity: .24; mask-image: linear-gradient(180deg,transparent 10%,#000 35%,#000 72%,transparent 96%); }
+    .wave-texture-light { filter: brightness(.52) contrast(1.4) saturate(1.3); opacity: .06; }
+    .wave-scene { opacity: .4; }
+    .hero-wave::before { background: radial-gradient(ellipse at 5% 62%,#3c78a315,transparent 30%),radial-gradient(ellipse at 96% 60%,#4986b015,transparent 29%); }
+
+    .project-card,.project-cover { color: var(--ink); box-shadow: inset 0 0 0 1px var(--card-edge,#46525d); }
+    .project-card.vanishtrans,.project-cover.vanishtrans {
+      --card-muted: #bdcddd; --card-edge: #465f73;
+      background: linear-gradient(145deg,#1e2d3d,#263d51 65%,#223443);
+    }
+    .project-card.esp32-lab,.project-cover.esp32-lab {
+      --card-muted: #c2d3c9; --card-edge: #4f6d60;
+      background: linear-gradient(120deg,#1c2d29,#2b4039);
+    }
+    .project-card.ai-chat,.project-cover.ai-chat {
+      --card-muted: #bdcdd2; --card-edge: #4c626c;
+      background: linear-gradient(125deg,#202b30,#26353b);
+    }
+    .project-card.vanishtrans::before { opacity: .11; filter: brightness(.55) saturate(1.1); }
+    .project-card .project-kind,.project-card-copy p,.project-card .visual-caption,.project-cover figcaption { color: var(--card-muted,var(--muted)); }
+    // Captions can cross the light screen/chip; give their text a bounded dark backing.
+    .project-card .visual-caption { background: color-mix(in srgb,var(--paper) 88%,transparent); padding: 2px 5px; border-radius: 2px; }
+    .project-card .round-arrow { color: #d9e5eb; }
+
+    // A light translation result and metal chip provide small, deliberate highlights.
+    .app-preview { background: #20282f; border-color: #64798a; color: #e8eff3; box-shadow: 0 20px 52px #0005,0 0 0 1px #a7c9e81a; }
+    .showcase-visual > .app-preview,.showcase-visual > .terminal-preview { box-shadow: 0 24px 58px #0006,0 0 0 1px #a7c9e81a; }
+    .window-bar { background: #26313a; color: #bac6d0; border-color: #53616c; }
+    .app-rail { color: #b4c1cc; .rail-active { background: #334b60; color: #d7e7f4; } }
+    .translation-text { background: #2b3843; border-color: #536b7c; small { color: #b6c4d0; } }
+    .selection-shortcut { color: #bfd0de; }
+    .translation-text.translated { background: #a8c2d4; color: #183246; border-color: #7797af; small { color: #254456; } .preview-symbol { color: #284c65; } .float-dot { background: #3c647e; } }
+    .flow-float::before { background: #a8c2d4; border-color: #7797af; }
+    .hardware-note { color: #c2d3c9; }
+    .chip-board { border-color: #50635d; }
+    .chip-core { background: linear-gradient(135deg,#d7ddd5,#b2beb8); color: #26312e; }
+    .circuit-labels { fill: #b0c6bb; }
+    .circuit-traces { stroke: #7e9b8d; }
+    .device-display text { fill: #e4f0eb; }
+    .display-light { fill: #3f605e; opacity: 1; }
+    .display-wave { stroke: #c0e1d2; }
+    .terminal-preview { background: #1d292e; color: #e2eceb; border-color: #63777c; }
+    .terminal-dim,.terminal-comment,.terminal-body small { color: #b0c4c4; }
+    .terminal-blue { color: #b4d8e7; }
+    .terminal-output p { color: #d1e4dc; }
+
+    .scene-computer,.scene-lamp,.scene-plant { stroke: #b4c4cb; }
+    .desk-haze { opacity: .22; }
+    .plant-leaf { fill: #819b8c; }
+    .scene-sun { fill: #c8b38a; }
+    .site-footer { background: var(--footer-surface); }
+    .footer-landscape path:first-child { fill: var(--footer-surface); }
+  }
+}
+@media (hover:hover) and (pointer:fine) {
+  :root[data-bs-theme="dark"] .personal-site .project-card:hover { box-shadow: inset 0 0 0 1px var(--card-edge),0 19px 40px #0003; }
+}
+@media (max-width:767px) {
+  :root[data-bs-theme="dark"] .personal-site {
+    .wave-scene { opacity: .26; }
+    .wave-texture-main { opacity: .21; }
+    .desk-haze { opacity: .12; }
+  }
+}

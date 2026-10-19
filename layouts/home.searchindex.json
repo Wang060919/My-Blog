@@ -1,0 +1,5 @@
+{{- $items := slice -}}
+{{- range where site.RegularPages "Section" "in" (slice "blog" "projects" "docs") -}}
+ {{- if not .Params.exclude_search -}}{{- $items = $items | append (dict "title" .Title "permalink" .RelPermalink "type" .Section "summary" (.Description | default (.Summary | plainify)) "tags" (.Params.tags | default slice) "content" (.Plain | truncate 20000)) -}}{{- end -}}
+{{- end -}}
+{{- $items | jsonify -}}

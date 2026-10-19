@@ -1,0 +1,6 @@
+{{ $key := . }}
+<div class="process-strip" aria-label="{{ if eq $key "vanishtrans" }}翻译流程示意{{ else if eq $key "esp32-lab" }}学习方向示意{{ else }}代码结构示意{{ end }}">
+ {{ if eq $key "vanishtrans" }}<span><i>01</i> 选取文本</span><b aria-hidden="true">→</b><span><i>02</i> 翻译请求</span><b aria-hidden="true">→</b><span><i>03</i> 继续阅读</span>
+ {{ else if eq $key "esp32-lab" }}<span><i>01</i> 阅读资料</span><b aria-hidden="true">→</b><span><i>02</i> 理解连接</span><b aria-hidden="true">→</b><span><i>03</i> 整理问题</span>
+ {{ else }}<span><i>01</i> 接收输入</span><b aria-hidden="true">→</b><span><i>02</i> 发起请求</span><b aria-hidden="true">→</b><span><i>03</i> 输出响应</span>{{ end }}
+</div>

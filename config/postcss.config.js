@@ -8,7 +8,20 @@ const purgecss = purgeCSSPlugin({
         return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])];
     },
     dynamicAttributes: [
+        'data-motion',
+        'data-reveal',
+        'data-home-reveal',
+        'data-switching',
+        'data-selected',
+        'data-filtered',
+        'data-enhanced',
+        'data-scrolled',
+        'data-closing',
+        'data-scroll-inactive',
         'aria-expanded',
+        'aria-selected',
+        'aria-pressed',
+        'aria-current',
         'data-bs-popper',
         'data-bs-target',
         'data-bs-theme',
@@ -23,6 +36,14 @@ const purgecss = purgeCSSPlugin({
         'type'
     ],
     safelist: [
+        /^view-transition/,
+        'data-vt-active',
+        'filter-empty',
+        'search-error-links',
+        'copy-status',
+        'copy-failed',
+        'mermaid-status',
+        'mark',
         'active',
         'btn-clipboard', // clipboards.js
         'clipboard', // clipboards.js

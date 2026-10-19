@@ -1,0 +1,5 @@
+<div class="search-widget" data-index="{{ "search-index.json" | relURL }}">
+ <form role="search"><label class="search-label" for="{{ . }}-query">搜索文章与作品</label><div class="search-input-wrap"><span aria-hidden="true">⌕</span><input id="{{ . }}-query" name="q" type="search" autocomplete="off" placeholder="试试 Hugo、Docker 或 VanishTrans" aria-controls="{{ . }}-results"><button class="search-clear" type="reset" aria-label="清空搜索">×</button></div></form>
+ <p class="search-status" role="status" aria-live="polite">输入关键词，查找这里的文章和作品。</p><div class="search-results" id="{{ . }}-results"></div><button class="text-link search-retry" type="button" hidden>重新加载搜索</button>
+ <noscript><p>搜索需要 JavaScript。你也可以浏览<a href="{{ "blog/" | relURL }}">全部文章</a>或<a href="{{ "projects/" | relURL }}">作品</a>。</p></noscript>
+</div>

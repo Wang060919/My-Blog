@@ -1,53 +1,10 @@
-{{/* Doks override: custom blog homepage. Preserve its layout when upgrading the theme. */}}
 {{ define "main" }}
-<section class="section container-fluid mt-n3 pb-3">
-  <div class="row justify-content-center">
-    <div class="col-lg-12 text-center">
-      <h1>{{ .Title }}</h1>
-    </div>
-    <div class="col-lg-9 col-xl-8 text-center">
-      <p class="lead">{{ site.Params.description }}</p>
-      <div class="d-flex flex-wrap justify-content-center gap-2 my-3">
-        <a class="btn btn-primary btn-cta rounded-pill btn-lg" href="{{ "blog/" | relURL }}" role="button">Read blog</a>
-        <a class="btn btn-outline-primary rounded-pill btn-lg" href="{{ "docs/" | relURL }}" role="button">View docs</a>
-      </div>
-      {{ .Content }}
-    </div>
-  </div>
-</section>
-{{ end }}
-
-{{ define "sidebar-prefooter" }}
-  {{ if site.Params.doks.backgroundDots -}}
-  <div class="d-flex justify-content-start">
-    <div class="bg-dots"></div>
-  </div>
-  {{ end -}}
-
-  <!-- 2. 下半部分  -->
-  <section class="section section-md section-features">
-    <div class="container">
-      <div class="row justify-content-center text-center">
-        <div class="col-lg-5 mb-4">
-          <h2 class="h4">🐳 DevOps & Scripts</h2>
-          <p class="text-muted">VPS optimization scripts, Docker containerization, deployment, and system troubleshooting practices.</p>
-        </div>
-        <div class="col-lg-5 mb-4">
-          <h2 class="h4">💻 Web Engineering</h2>
-          <p class="text-muted">Full-stack web development notes, modern frontend frameworks, and Hugo static site optimization.</p>
-        </div>
-        <div class="col-lg-5 mb-4">
-          <h2 class="h4">🤖 AI & Productivity</h2>
-          <p class="text-muted">Hands-on experience with LLMs, AI coding assistants, and modern developer workflows.</p>
-        </div>
-        <div class="col-lg-5 mb-4">
-          <h2 class="h4">📚 Read the Docs</h2>
-          <p class="text-muted">Learn more, explore guides, and browse project references in the <a href="/docs/">Docs</a>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-{{ end }}
-
-{{ define "sidebar-footer" }}
+<section class="home-intro" aria-labelledby="home-title"><div class="hero-wave-scroll" aria-hidden="true"><div class="hero-wave">{{ partial "site/waves.html" . }}</div></div><div class="shell">
+ <div class="hero-copy"><div class="hero-scroll-heading"><p class="eyebrow hero-enter">PERSONAL WORKSPACE</p><h1 id="home-title" class="hero-enter">让想法，<span>运行起来。</span></h1></div><div class="hero-scroll-support"><p class="hero-description hero-enter">你好，我是 Wang。<br class="mobile-only">在软件、AI 与硬件之间，<br class="desktop-only">把好奇变成作品，把过程写成记录。</p><div class="hero-actions hero-enter"><a class="button button-dark" href="#selected-work">探索作品 <span aria-hidden="true">↘</span></a><a class="button button-outline" href="{{ "blog/" | relURL }}">阅读文章 <span aria-hidden="true">↗</span></a></div></div></div>
+ <div class="showcase"><div class="showcase-heading"><h2>从代码，到真实世界。</h2><span class="eyebrow">IDEAS IN PROGRESS</span></div><div class="project-tabs" role="tablist" aria-label="作品展示">{{ range $i, $p := (where site.RegularPages "Section" "projects").ByWeight }}<button type="button" role="tab" id="tab-{{ .Params.visual }}" aria-controls="panel-{{ .Params.visual }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}" tabindex="{{ if eq $i 0 }}0{{ else }}-1{{ end }}">{{ .Title }}</button>{{ end }}</div>
+ <div class="showcase-stage">{{ range $i, $p := (where site.RegularPages "Section" "projects").ByWeight }}<section role="tabpanel" id="panel-{{ .Params.visual }}" aria-labelledby="tab-{{ .Params.visual }}" class="showcase-panel" data-assembly{{ if ne $i 0 }} hidden{{ end }}><div class="showcase-visual" data-project-surface="{{ .Params.visual }}"><div class="visual-guide" aria-hidden="true"><span>CONCEPT / {{ printf "%02d" (add $i 1) }}</span><i></i><i></i><i></i><i></i></div>{{ partial "site/preview.html" .Params.visual }}</div>{{ partial "site/process.html" .Params.visual }}<div class="showcase-caption"><div><strong>{{ .Title }}</strong><span>{{ .Params.short }}</span></div><a class="text-link" data-project-link="{{ .Params.visual }}" href="{{ .RelPermalink }}">了解项目 <span aria-hidden="true">↗</span></a></div></section>{{ end }}</div><div class="showcase-footnote"><p class="showcase-disclaimer">视觉示意 · 项目实际功能与进展以详情说明为准</p><button class="replay-assembly" type="button" hidden aria-label="重看当前作品的分层演示"><span aria-hidden="true">↻</span> 重看演示</button></div><noscript><p>更多作品：{{ range (where site.RegularPages "Section" "projects").ByWeight }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>　{{ end }}</p></noscript></div>
+</div></section>
+<section id="selected-work" class="shell home-section" data-home-reveal-group><div class="section-heading" data-home-reveal="heading"><div><p class="eyebrow">01 / SELECTED WORK</p><h2>把好奇心，做成作品。</h2></div><a class="text-link" href="{{ "projects/" | relURL }}">全部作品 <span aria-hidden="true">↗</span></a></div><div class="project-grid">{{ range (where site.RegularPages "Section" "projects").ByWeight }}{{ partial "site/project-card.html" . }}{{ end }}</div></section>
+<section class="shell home-section" data-home-reveal-group><div class="section-heading" data-home-reveal="heading"><div><p class="eyebrow">02 / JOURNAL</p><h2>最近写作</h2></div><a class="text-link" href="{{ "blog/" | relURL }}">全部文章 <span aria-hidden="true">↗</span></a></div><div class="recent-posts">{{ range first 3 (where site.RegularPages "Section" "blog").ByDate.Reverse }}{{ partial "site/post-row.html" . }}{{ end }}</div></section>
+<section class="shell home-about home-section" data-home-reveal-group><div><div data-home-reveal="heading"><p class="eyebrow">03 / A LITTLE ABOUT ME</p><h2>不只写代码，<br>也记录过程。</h2></div><div data-home-reveal="card"><p>从一个具体的问题出发，尝试工具，理解原理，<br class="desktop-only">再把解决问题的过程整理下来。</p><p>这里放着我的软件项目、学习练习，<br class="desktop-only">以及一路积累的技术笔记。</p><a class="text-link" href="{{ "about/" | relURL }}">关于我 <span aria-hidden="true">↗</span></a><div class="about-values"><span>↳ 学习</span><span>⌁ 实践</span><span>✧ 思考</span></div></div></div>{{ partial "site/desk.html" . }}</section>
 {{ end }}

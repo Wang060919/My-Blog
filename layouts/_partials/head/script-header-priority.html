@@ -1,0 +1,5 @@
+<script>try{const t=localStorage.getItem('wang-theme');document.documentElement.dataset.bsTheme=t==='dark'||t==='light'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){}</script>
+{{ if .IsHome }}<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window&&Element.prototype.animate&&CSS.supports('translate: 0 1px')){const root=document.documentElement;root.dataset.homeReveal='boot';setTimeout(()=>{if(root.dataset.homeReveal==='boot'){root.dataset.homeReveal='disabled';document.querySelectorAll('.is-home [data-home-reveal]').forEach(el=>el.dataset.reveal='visible')}},1200)}}catch(e){}</script>{{ end }}
+{{ $navigation := resources.Get "js/navigation.js" | minify | fingerprint }}
+<script src="{{ $navigation.RelPermalink }}" integrity="{{ $navigation.Data.Integrity }}"></script>
+<link rel="expect" href="#page-content-ready" blocking="render">

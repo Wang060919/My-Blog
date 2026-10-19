@@ -1,23 +1,19 @@
-{{/* Doks override: use languageTag and IsBranch for current Hugo compatibility. */}}
+{{/* Personal site shell. Hugo/Doks still provide assets, SEO and content rendering. */}}
 <!doctype html>
-<html lang="{{ .Site.Language.Params.languageTag | default "en" }}" data-bs-theme="{{ site.Params.doks.colorMode | default "auto" }}">
-  {{ partial "head/head" . }}
-  {{ partial "head/body-class" . }}
-  <body class="{{ delimit (.Scratch.Get "class") " " }}"{{ if eq site.Params.doks.scrollSpy true }} data-bs-spy="scroll" data-bs-target="#toc" data-bs-root-margin="0px 0px -60%" data-bs-smooth-scroll="true" tabindex="0"{{ end }}>
-    {{ partial "header/header" . }}
-    <div class="wrap container-{{ site.Params.doks.containerBreakpoint | default "lg" }}" role="document">
-      <div class="content">
-      {{ if and (eq site.Params.doks.containerBreakpoint "fluid") (or (not (in .Site.Params.mainSections .Type)) (.IsBranch)) }}<div class="container p-0">{{ end }}
-        {{ block "main" . }}{{ end }}
-      {{ if and (eq site.Params.doks.containerBreakpoint "fluid") (or (not (in .Site.Params.mainSections .Type)) (.IsBranch)) }}</div>{{ end }}
-      </div>
-    </div>
-    {{ block "sidebar-prefooter" . }}{{ end }}
-    {{ block "sidebar-footer" . }}{{ end }}
-    {{ partial "footer/footer" . }}
-    {{ partial "footer/script-footer" . }}
-    {{ if eq site.Params.doks.toTopButton true -}}
-      {{ partial "footer/to-top" . }}
-    {{ end }}
-  </body>
+<html lang="{{ site.Language.Params.languageTag | default "zh-CN" }}" data-bs-theme="light">
+{{ partial "head/head" . }}
+<body class="personal-site {{ if .IsHome }}is-home{{ end }}">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <span class="header-sentinel" aria-hidden="true"></span>
+  {{ partial "site/header.html" . }}
+  <main id="main" tabindex="-1">{{ block "main" . }}{{ end }}</main>
+  <span id="page-content-ready" hidden></span>
+  {{ partial "site/footer.html" . }}
+  {{ partial "site/search.html" . }}
+  {{ $script := resources.Get "js/site.js" | js.Build | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" defer></script>
+  {{ $copy := resources.Get "js/custom.js" | minify | fingerprint }}
+  <script src="{{ $copy.RelPermalink }}" integrity="{{ $copy.Data.Integrity }}" defer></script>
+  {{ if .Store.Get "hasMermaid" }}{{ $mermaid := resources.Get "js/mermaid-init.js" }}<script type="module" src="{{ $mermaid.RelPermalink }}"></script>{{ end }}
+</body>
 </html>

@@ -1,6 +1,8 @@
-# Wang的技术博客
+# Wang 的个人网站
 
-基于 Hugo、Doks 和 Bootstrap/SCSS 的静态个人博客，部署到 Cloudflare Pages。
+基于 Hugo、Doks 和 Bootstrap/SCSS 的静态个人网站，保留技术博客与 Cloudflare Pages 发布流程。
+
+首页展示作品与最近文章；`/projects/`、`/blog/`、`/about/`、`/docs/`、`/archives/`、`/tags/`、`/categories/`、`/search/` 共用导航、排版和主题。文档尚无独立正文时显示真实空状态。作品资料与视觉素材的边界见 [改版维护说明](docs/REDESIGN_NOTES.md)。
 
 ## 本地开发
 
@@ -88,7 +90,9 @@ categories: ["技术"]
 
 ## 主题升级
 
-自定义样式入口为 `assets/scss/common/_custom.scss`；自定义代码为 `assets/js/custom.js`。`assets/js/mermaid-init.js` 覆盖主题加载器以固定版本。
+自定义样式入口为 `assets/scss/common/_custom.scss`，其中保留原代码样式并导入 `_personal-site.scss`。`assets/js/site.js` 管理导航、主题、本地搜索、筛选和动效；`assets/js/custom.js` 管理单一代码复制按钮。`assets/js/mermaid-init.js` 固定图表版本并提供加载失败降级。
+
+当前页面外壳使用 `layouts/baseof.html`、`layouts/_partials/site/` 与分栏目模板，Doks 继续提供 SCSS、内容渲染和 SEO。不要同时启用主题旧的导航或搜索脚本，以免重复绑定事件。项目字段在 `content/projects/`；未来独立文档可加入 `content/docs/`，设置明确的 `title` 和 `slug` 后自动出现在文档树与搜索中。
 
 升级 Doks/SEO 包时，核对 `layouts/` 中带注释的覆盖：导航相对链接、语言标签、contributors 空值处理、首页、Dart Sass、favicon 与 Open Graph。`seo/base.html` 有意禁用 base 标签。生产 CSS 使用 buildStats + PostProcess，等待页面统计生成后再执行 PurgeCSS；`hugo_stats.json` 保持忽略，不预先提交或伪造。
 

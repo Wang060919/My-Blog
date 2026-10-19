@@ -16,6 +16,8 @@
   --gh-btn-fg: #656d76;
   --gh-btn-hover-bg: #f3f4f6;
   --gh-btn-hover-fg: #1f2328;
+  --gh-btn-success: #1a7f37;
+  --gh-btn-error: #b42318;
   
   // 高亮配色
   --gh-syn-comment: #6e7781;
@@ -34,9 +36,11 @@
   // 复制按钮
   --gh-btn-bg: #21262d;
   --gh-btn-border: #30363d;
-  --gh-btn-fg: #8b949e;
+  --gh-btn-fg: #b0bdc9;
   --gh-btn-hover-bg: #30363d;
-  --gh-btn-hover-fg: #c9d1d9;
+  --gh-btn-hover-fg: #edf3f8;
+  --gh-btn-success: #85d3a4;
+  --gh-btn-error: #f0a59d;
   
   // 高亮配色
   --gh-syn-comment: #8b949e;
@@ -134,11 +138,11 @@ figure.highlight,
   
   color: var(--gh-btn-fg) !important;
   cursor: pointer !important;
-  opacity: 0.65 !important;               // 平时稍微淡一点
+  opacity: 1 !important;
   transition: all 0.18s ease !important;
 
   // 鼠标移上去时图标加深高亮
-  &:hover {
+  &:hover, &:focus-visible {
     opacity: 1 !important;
     color: var(--gh-btn-hover-fg) !important;
     background: transparent !important;   // 保持无背景
@@ -147,16 +151,22 @@ figure.highlight,
 
   // 复制成功时不加边框
   &.copied {
+    color: var(--gh-btn-success) !important;
     border: none !important;
     opacity: 1 !important;
   }
+  &.copy-failed { color: var(--gh-btn-error) !important; }
+  &:focus-visible { outline: 2px solid var(--accent) !important; outline-offset: 2px; }
 
   svg {
     display: block !important;
     width: 18px !important;
     height: 18px !important;
+    &, path { fill: currentColor !important; }
   }
 }
+.gh-copy-btn.copied + .copy-status { color: var(--gh-btn-success); }
+.gh-copy-btn.copy-failed + .copy-status { color: var(--gh-btn-error); }
 
 // 5. 行内代码
 code:not(pre code) {
@@ -179,3 +189,14 @@ code:not(pre code) {
   .o, .ow { color: var(--gh-syn-operator) !important; font-weight: 500 !important; }
   .p { color: var(--gh-code-fg) !important; }
 }
+// Unified personal-site layouts; preserve all code styles above.
+@import "personal-site";
+
+// Refined wave surfaces and interaction rhythm.
+@import "motion-polish";
+
+@import "studio";
+@import "project-flow";
+@import "hero-scroll";
+@import "home-reveal";
+@import "dark-site";

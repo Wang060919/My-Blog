@@ -63,4 +63,50 @@ for (const rule of rules) {
 }
 assert.equal(targets.size, 8, 'Expected eight legacy article redirects');
 assert.equal(sources.size, 16, 'Expected redirects with and without trailing slashes');
+// Personal-site routes and local-only search must survive production asset pruning.
+const personalRoutes = ['projects', 'projects/vanishtrans', 'projects/esp32-lab', 'projects/ai-chat', 'blog', 'about', 'docs', 'archives', 'tags', 'categories', 'search'];
+for (const route of personalRoutes) {
+  const html = read(`${route}/index.html`);
+  assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `Expected one H1: ${route}`);
+  assert.ok(html.includes('class=site-header') || html.includes('class="site-header"'), `Missing shared navigation: ${route}`);
+}
+const searchIndex = JSON.parse(read('search-index.json'));
+assert.equal(searchIndex.filter((item) => item.type === 'blog').length, published, 'Search must include every published article');
+assert.equal(searchIndex.filter((item) => item.type === 'projects').length, 3, 'Search must include the three real project entries');
+for (const item of searchIndex) {
+  assert.ok(['blog', 'projects', 'docs'].includes(item.type), `Unexpected search type: ${item.type}`);
+  assert.ok(fs.existsSync(path.join(output, decodeURIComponent(item.permalink), 'index.html')), `Missing search target: ${item.permalink}`);
+}
+const docsSources = fs.readdirSync('content/docs').filter((name) => name !== '_index.md');
+if (docsSources.length === 0) {
+  assert.ok(read('docs/index.html').includes('文档正在整理'), 'Empty documentation must show an honest empty state');
+  assert.equal(searchIndex.filter((item) => item.type === 'docs').length, 0, 'Empty docs must not produce fake search entries');
+}
+for (const selector of ['data-motion', 'data-reveal', 'data-switching', 'data-selected', 'data-enhanced', 'data-scrolled', '.wave-texture', '.search-error-links']) {
+  assert.ok(css.includes(selector), `PurgeCSS removed interactive state: ${selector}`);
+}
+assert.ok(home.includes('wave-scene') && home.includes('data-wave-lane'), 'Missing progressive wave geometry');
+assert.ok(fs.existsSync(path.join(output, 'images/hero-waves-v2.webp')), 'Missing optimized wave texture');
+for (const selector of ['@view-transition', '::view-transition-group(project-surface)', '.desk-scene', '.process-strip', '.replay-assembly']) {
+  assert.ok(css.includes(selector), `PurgeCSS removed studio interaction style: ${selector}`);
+}
+assert.ok(home.includes('data-project-surface') && home.includes('data-assembly'), 'Missing progressive project illustration hooks');
+assert.ok(home.includes('page-content-ready') && home.includes('blocking=render'), 'Missing native transition render boundary');
+assert.ok(!home.includes('jost-v4-latin-'), 'Personal pages must not preload unused theme fonts');
+for (const hook of ['data-flow=translation', 'data-flow=signal', 'data-flow=request']) {
+  assert.ok(home.includes(hook) || home.includes(hook.replace('=', '="')+'"'), `Missing project flow: ${hook}`);
+}
+for (const selector of ['.selection-mark', '.signal-packets', '.terminal-output', '::view-transition-group-children(project-surface)']) {
+  assert.ok(css.includes(selector), `Missing project flow style: ${selector}`);
+}
+for (const selector of ['.hero-scroll-heading', '.hero-scroll-support', '.hero-wave-scroll', 'data-scroll-inactive']) {
+  assert.ok(css.includes(selector), `Missing reversible hero style: ${selector}`);
+}
+assert.ok(home.includes('hero-scroll-heading') && home.includes('hero-scroll-support'), 'Missing reversible hero wrappers');
+assert.equal((home.match(/data-home-reveal-group/g) || []).length, 3, 'Homepage must retain work, journal and about entrance groups');
+assert.ok(home.includes('homeReveal') && home.includes('1200'), 'Missing bounded entrance bootstrap fallback');
+assert.ok(css.includes('data-home-reveal') && css.includes('prefers-reduced-motion'), 'Missing progressive homepage entrance styles');
+assert.ok(css.includes('--card-muted') && css.includes('--footer-surface'), 'Missing scoped dark surfaces');
+assert.ok(css.includes('.copy-failed') && css.includes('--gh-btn-success') && css.includes('--gh-btn-error'), 'Missing copy feedback theme states');
 console.log(`Build verified: ${published} articles, ${locations.length} sitemap URLs, ${diagramPages} Mermaid page(s), 8 legacy URL mappings, copy button CSS, and 404.html.`);
+console.log(`Personal site verified: ${personalRoutes.length} routes, ${searchIndex.length} search entries, documentation state, and production interaction styles.`);

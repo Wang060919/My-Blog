@@ -1,0 +1,4 @@
+<a class="project-card project-{{ .File.ContentBaseName | default .Params.visual }} {{ .Params.visual }}" href="{{ .RelPermalink }}" data-project-link="{{ .Params.visual }}" data-project-surface="{{ .Params.visual }}" data-category="{{ .Params.category }}" data-reveal data-home-reveal="card" data-assembly>
+ <div class="project-card-copy"><span class="project-kind">{{ .Params.category }} / {{ .Params.status }}</span><h3>{{ .Title }}</h3><p>{{ .Params.lead | default .Description }}</p><span class="round-arrow" aria-hidden="true">↗</span></div>
+ <div class="project-card-visual">{{ partial "site/preview.html" .Params.visual }}</div><span class="visual-caption">{{ if eq .Params.visual "vanishtrans" }}界面设计示意{{ else if eq .Params.visual "esp32-lab" }}开发板示意{{ else }}交互结构示意{{ end }}</span>
+</a>

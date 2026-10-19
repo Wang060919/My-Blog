@@ -1,7 +1,6 @@
 ---
-title: "Wang的技术博客"
-description: "Wang的技术博客，分享 Hugo、Docker、Web 开发、AI 工具与服务器运维实践，记录配置、部署和问题排查经验。"
-lead: "Wang的技术博客，分享 Hugo、Docker、Web 开发、AI 工具与服务器运维实践，记录配置、部署和问题排查经验。"
+title: "Wang — 让想法，运行起来。"
+description: "Wang 的个人空间：软件项目、AI 与硬件学习，以及 Hugo、Docker、开发工作流和运维实践。保持好奇，慢慢构建。"
 draft: false
 images: ["cover.png"]
 ---

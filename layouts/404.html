@@ -1,9 +1,1 @@
-{{ define "main" }}
-<div class="row justify-content-center py-5">
-  <div class="col-md-12 col-lg-10 col-xl-8 text-center">
-    <h1>404 · 页面不存在</h1>
-    <p>这个地址可能已变更，或页面尚未发布。</p>
-    <a href="{{ "/" | relLangURL }}">返回首页</a>
-  </div>
-</div>
-{{ end }}
+{{ define "main" }}<div class="shell page-space error-page"><p class="error-number" aria-hidden="true">404</p><h1>这一页，暂时走丢了。</h1><p>可能是链接有误，也可能内容已经搬了家。<br>回到熟悉的地方，或寻找另一个想法。</p><div class="hero-actions"><a class="button button-dark" href="{{ "/" | relURL }}">返回首页 ↗</a><a class="button button-outline" href="{{ "search/" | relURL }}" data-open-search>搜索内容 ⌕</a></div><section class="error-suggestions"><h2>也许从这里继续</h2>{{ range first 2 (where site.RegularPages "Section" "blog").ByDate.Reverse }}<a href="{{ .RelPermalink }}">{{ .Title }} ↗</a>{{ end }}<a href="{{ "projects/" | relURL }}">浏览作品 ↗</a></section></div>{{ end }}

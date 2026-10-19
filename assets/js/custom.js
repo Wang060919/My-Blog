@@ -18,34 +18,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.createElement('button');
     btn.className = 'gh-copy-btn';
     btn.setAttribute('type', 'button');
-    btn.setAttribute('aria-label', 'Copy to clipboard');
-    btn.setAttribute('title', 'Copy');
+    btn.setAttribute('aria-label', '复制代码');
+    btn.setAttribute('title', '复制代码');
+    const code = pre.querySelector('code') || pre;
+    const textToCopy = code.textContent;
+    const status = document.createElement('span');
+    status.className = 'copy-status';
+    status.setAttribute('role', 'status');
 
     // GitHub 复制图标 SVG
     const copyIcon = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16" fill="currentColor"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>`;
     
     // 复制成功勾选 SVG
-    const successIcon = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16" fill="#1a7f37"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path></svg>`;
+    const successIcon = `<svg aria-hidden="true" height="16" viewBox="0 0 16 16" width="16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path></svg>`;
 
     btn.innerHTML = copyIcon;
+    let resetFeedback;
 
     // 点击复制事件
     btn.addEventListener('click', async () => {
-      const code = pre.querySelector('code') || pre;
-      const textToCopy = code.innerText.trim();
+      clearTimeout(resetFeedback);
+      btn.classList.remove('copy-failed');
       try {
         await navigator.clipboard.writeText(textToCopy);
         btn.innerHTML = successIcon;
         btn.classList.add('copied');
-        setTimeout(() => {
+        btn.setAttribute('aria-label', '代码已复制');
+        status.textContent = '已复制';
+        resetFeedback=setTimeout(() => {
           btn.innerHTML = copyIcon;
           btn.classList.remove('copied');
+          btn.setAttribute('aria-label', '复制代码');
+          status.textContent = '';
         }, 2000);
       } catch (err) {
-        console.error('复制失败:', err);
+        btn.innerHTML = copyIcon;
+        btn.classList.remove('copied');
+        btn.classList.add('copy-failed');
+        btn.setAttribute('aria-label', '复制失败，重试复制代码');
+        status.textContent = '复制失败，请选中代码后手动复制。';
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
       }
     });
 
     container.appendChild(btn);
+    container.appendChild(status);
   });
 });

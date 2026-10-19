@@ -1,0 +1,13 @@
+.personal-site {
+  .hero-wave-scroll { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--scroll-wave-alpha,1); }
+  .hero-scroll-heading,.hero-scroll-support { display: flow-root; }
+  .hero-scroll-heading,.hero-scroll-support,.showcase {
+    opacity: var(--scroll-alpha,1); translate: 0 var(--scroll-shift,0px);
+  }
+  [data-scroll-inactive] { pointer-events: none; }
+  .hero-copy .hero-description { animation-delay: 130ms; }
+  .hero-copy .hero-actions { animation-delay: 195ms; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .personal-site :is(.hero-scroll-heading,.hero-scroll-support,.showcase,.hero-wave-scroll) { opacity: 1 !important; translate: 0 0 !important; }
+}

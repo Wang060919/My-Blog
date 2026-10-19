@@ -1,0 +1,11 @@
+// Readable by default. The tiny head bootstrap prevents a visible-then-hidden flash.
+.personal-site.is-home [data-home-reveal] { --reveal-distance: 30px; }
+.personal-site.is-home [data-home-reveal="heading"] { --reveal-distance: 20px; }
+html[data-home-reveal="boot"] .personal-site.is-home [data-home-reveal],
+.personal-site.is-home [data-home-reveal][data-reveal="pending"] {
+  opacity: 0; translate: 0 var(--reveal-distance);
+}
+.personal-site.is-home [data-home-reveal]:focus-within { opacity: 1 !important; translate: 0 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .personal-site.is-home [data-home-reveal] { opacity: 1 !important; translate: 0 0 !important; }
+}
