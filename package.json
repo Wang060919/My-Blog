@@ -6,13 +6,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/hugo-runner.js server --disableFastRender --noHTTPCache --destination .dev-public",
-    "build": "node scripts/hugo-runner.js --environment production --minify --gc --cleanDestinationDir",
+    "build": "node scripts/check-contributions.js && node scripts/hugo-runner.js --environment production --minify --gc --cleanDestinationDir",
     "preview": "node scripts/hugo-runner.js server --environment production --navigateToChanged --destination .dev-public",
     "check": "node scripts/health-check.js",
     "verify": "node scripts/verify-build.js",
     "setup:cloud": "node scripts/setup-cloud.js",
-    "test": "node scripts/test-search.js && node scripts/test-motion.js && node scripts/test-theme.js",
-    "ci": "npm test && npm run build && npm run verify"
+    "test": "node scripts/test-search.js && node scripts/test-motion.js && node scripts/test-theme.js && node scripts/test-contributions.js",
+    "ci": "npm test && npm run build && npm run verify",
+    "contributions:update": "node scripts/update-contributions.js",
+    "preview:contributions": "node scripts/preview-contributions.js"
   },
   "dependencies": {
     "@tabler/icons": "^3.36.1",

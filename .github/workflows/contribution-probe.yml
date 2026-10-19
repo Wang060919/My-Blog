@@ -1,0 +1,33 @@
+name: Read public contribution snapshot
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - '.github/workflows/contribution-probe.yml'
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'feat/github-contribution-calendar-20261019'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch only public daily contribution aggregates
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/update-contributions.js
+      - name: Validate snapshot
+        run: node scripts/check-contributions.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-contribution-snapshot
+          path: data/github_contributions.json
+          retention-days: 3
+          if-no-files-found: error

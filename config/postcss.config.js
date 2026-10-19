@@ -9,6 +9,7 @@ const purgecss = purgeCSSPlugin({
     },
     dynamicAttributes: [
         'data-motion',
+        'data-level',
         'data-reveal',
         'data-home-reveal',
         'data-hero-entry',
@@ -38,6 +39,7 @@ const purgecss = purgeCSSPlugin({
     ],
     safelist: [
         /^view-transition/,
+        /^contribution-/,
         'data-vt-active',
         'filter-empty',
         'search-error-links',
