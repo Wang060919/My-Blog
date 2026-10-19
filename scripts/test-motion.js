@@ -57,6 +57,8 @@ function fixture({ reduced = false, compact = false, scroll = 0, navigation = 'n
   document.documentElement = new Element('html'); document.activeElement = new Element('body'); document.hidden = false;
   const hero = new Element('hero', 78, 1000), heading = new Element('heading', 140, 180), support = new Element('support', 340, 170), showcase = new Element('showcase', 550, 550), stage = new Element('stage', 650, 420), visual = new Element('visual', 650, 330), work = new Element('work', 1200, 500), header = new Element('header', 0, 78);
   hero.selectors = { '.hero-scroll-heading': heading, '.hero-scroll-support': support, '.showcase': showcase, '.showcase-stage': stage, '.showcase-visual': visual };
+  const entryHeading = new Element('entry-heading', 1200, 100);
+  work.selectors = { '[data-hero-entry]': entryHeading };
   const targets = [new Element('reveal-heading', 1200, 100), new Element('card-1', 1340, 300), new Element('card-2', 1660, 300), new Element('card-3', 2000, 300)];
   targets.forEach((element, index) => { element.dataset.homeReveal = index ? 'card' : 'heading'; element.group = work; });
   document.querySelector = selector => ({ '.home-intro': hero, '.site-header': header, '.replay-assembly': null })[selector] || null;
@@ -75,7 +77,7 @@ function fixture({ reduced = false, compact = false, scroll = 0, navigation = 'n
     vm.runInContext(source, scope, { filename: `assets/js/${file}.js` });
     return scope[name](...args);
   }
-  return { context, window, document, frames, observers, resizeObservers, Element, motion, mobile, fine, hero, heading, support, showcase, stage, work, targets, load,
+  return { context, window, document, frames, observers, resizeObservers, Element, motion, mobile, fine, hero, heading, support, showcase, stage, work, entryHeading, targets, load,
     tick(now = 100) { const scheduled = [...frames.values()]; frames.clear(); scheduled.forEach(callback => callback(now)); },
     scrollTo(y) { context.scrollY = y; window.emit('scroll'); },
     reveal() { load('home-reveal', 'initHomeReveal', motion); }, heroScroll() { load('hero-scroll', 'initHeroScroll', motion); } };
@@ -179,6 +181,38 @@ test('Waves stop scheduling frames and clear parallax when paused', () => {
 });
 test('Reduced-motion waves never start a frame loop', () => {
   const f = fixture({ reduced: true }); const svg = new f.Element('svg'); const waves = f.load('waves', 'initWaves', svg, f.motion); waves.setRunning(true); assert.equal(f.frames.size, 0); assert.equal(svg.dataset.waveRunning, 'false');
+});
+test('Selected-work heading follows the shared scroll timeline and reverses', () => {
+  const f = fixture(); f.heroScroll(); assert.equal(alpha(f.entryHeading), 0); assert.equal(f.entryHeading.inert, true);
+  f.scrollTo(600); f.tick(); const partial = alpha(f.entryHeading); assert.ok(partial > 0 && partial < 1);
+  f.scrollTo(800); f.tick(); assert.equal(alpha(f.entryHeading), 1); assert.equal(f.entryHeading.inert, false);
+  f.scrollTo(600); f.tick(); assert.equal(alpha(f.entryHeading), partial);
+});
+test('Selected-work keyboard focus stays visible throughout its entrance', () => {
+  const f = fixture(); const link = new f.Element('link'); link.focusVisible = true; f.entryHeading.children.push(link); f.document.activeElement = link;
+  f.heroScroll(); assert.equal(alpha(f.entryHeading), 1); assert.equal(f.entryHeading.inert, false);
+});
+test('Reduced motion releases incoming styles and preview perspective', () => {
+  const f = fixture(); f.heroScroll(); f.motion.change(true);
+  assert.equal(f.entryHeading.style.getPropertyValue('--scroll-alpha'), ''); assert.equal(f.entryHeading.inert, false);
+  assert.equal(f.hero.style.getPropertyValue('--preview-tilt'), '');
+});
+test('Hero cancels a queued frame when the document becomes hidden', () => {
+  const f = fixture(); f.heroScroll(); f.scrollTo(500); assert.equal(f.frames.size, 1);
+  f.document.hidden = true; f.document.emit('visibilitychange'); assert.equal(f.frames.size, 0);
+});
+test('Hero stops scheduling once the transition is offscreen and resumes on return', () => {
+  const f = fixture(); f.heroScroll(); f.scrollTo(1800); f.tick(); f.scrollTo(1900); assert.equal(f.frames.size, 0);
+  f.scrollTo(600); assert.equal(f.frames.size, 1); f.tick(); assert.ok(alpha(f.entryHeading) < 1);
+});
+test('Compact mode keeps preview perspective flat', () => {
+  const f = fixture({ compact: true }); f.heroScroll(); f.scrollTo(900); f.tick();
+  assert.equal(f.hero.style.getPropertyValue('--preview-tilt'), '0deg');
+});
+test('Incoming heading has a single scroll owner instead of a second reveal timer', () => {
+  const html = fs.readFileSync(path.join(repo, 'layouts/home.html'), 'utf8');
+  assert.match(html, /class="section-heading" data-hero-entry/);
+  assert.doesNotMatch(html, /data-hero-entry[^>]*data-home-reveal/);
 });
 const output = { mode: 'Node VM executes production motion modules against deterministic geometry, lifecycle, observer and animation test doubles; not browser/layout validation.', tests, passed: tests.filter(item => item.passed).length, failed: tests.filter(item => !item.passed).length };
 console.log(JSON.stringify(output, null, 2)); process.exitCode = output.failed ? 1 : 0;

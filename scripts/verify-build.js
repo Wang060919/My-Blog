@@ -120,3 +120,12 @@ assert.ok(css.includes('.copy-failed') && css.includes('--gh-btn-success') && cs
 console.log(`Build verified: ${published} articles, ${locations.length} sitemap URLs, ${diagramPages} Mermaid page(s), 8 legacy URL mappings, copy button CSS, and 404.html.`);
 console.log(`Personal site verified: ${personalRoutes.length} routes, ${searchIndex.length} search entries, documentation state, and production interaction styles.`);
 console.log('Light-only shell verified: homepage, 404, articles and personal routes start light and contain no theme controls.');
+
+assert.ok(home.includes('data-hero-entry'), 'Missing scroll-owned selected-work heading');
+for (const token of ['--paper:#fcfaf8', '--ink:#26251e', '--radius-panel:6px', '--radius-control:999px']) {
+  assert.ok(css.replace(/\s+/g, '').includes(token), `Missing editorial token: ${token}`);
+}
+for (const selector of ['data-hero-entry', '--preview-tilt', '.project-grid:not([data-filtered=']) {
+  assert.ok(css.includes(selector), `Missing editorial state: ${selector}`);
+}
+console.log('Editorial surfaces verified: warm palette, responsive project grid and shared scroll entrance survive production pruning.');

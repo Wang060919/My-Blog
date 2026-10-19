@@ -11,6 +11,7 @@ const purgecss = purgeCSSPlugin({
         'data-motion',
         'data-reveal',
         'data-home-reveal',
+        'data-hero-entry',
         'data-switching',
         'data-selected',
         'data-filtered',
