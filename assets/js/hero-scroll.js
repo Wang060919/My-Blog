@@ -35,7 +35,7 @@ export function initHeroScroll(reduced) {
     const incoming=smooth((vh*.98-(entry.top-y))/(vh*.34));
     hero.style.setProperty('--scroll-wave-alpha',(1-incoming*.88).toFixed(4));
   };
-  const schedule=()=>{if(!frame && !document.hidden)frame=requestAnimationFrame(update);};
+  const schedule=()=>{if(!frame && !document.hidden && !reduced.matches)frame=requestAnimationFrame(update);};
   const measure=()=>{
     cancelAnimationFrame(frame);frame=0;
     metrics={h:box(heading),s:box(support),show:box(showcase),visual:box(stage),entry:box(work),header:document.querySelector('.site-header')?.offsetHeight||0};

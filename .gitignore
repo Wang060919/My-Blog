@@ -34,3 +34,7 @@ hugo_stats.json
 .wrangler/
 .dev-public/
 .npmrc
+
+# Reproducible cloud toolchain and caches
+.tools/
+.cache/

@@ -28,7 +28,7 @@ export function initHomeReveal(reduced) {
     }
   };
   const schedule = () => {
-    if (!frame && (pending.size || active.size)) frame = requestAnimationFrame(showPassed);
+    if (!frame && !document.hidden && (pending.size || active.size)) frame = requestAnimationFrame(showPassed);
   };
   const enter = (element, delay) => {
     pending.delete(element); observer.unobserve(element);
@@ -83,6 +83,12 @@ export function initHomeReveal(reduced) {
     // Existing native-navigation scroll priming happens before the shared snapshot.
     document.addEventListener('hero-scroll-sync', showViewport);
     addEventListener('pagehide', () => [...active.keys()].forEach(finish));
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(frame); frame = 0;
+        [...active.keys()].forEach(finish);
+      } else showViewport();
+    });
     addEventListener('pageshow', event => {
       if (event.persisted || scrollY > 8 || navigationType === 'back_forward') showViewport();
       requestAnimationFrame(() => { if (scrollY > 8) showViewport(); });
