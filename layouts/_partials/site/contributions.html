@@ -1,4 +1,4 @@
-{{ $data := hugo.Data.github_contributions }}
+{{ $data := site.Data.github_contributions }}
 <section id="building" class="shell home-section contribution-section" aria-labelledby="building-title" data-contributions>
   <div class="section-heading"><div><p class="eyebrow">02 / 持续构建</p><h2 id="building-title">把想法，写进每一天。</h2></div><a class="text-link" href="https://github.com/Wang060919">@Wang060919 <span aria-hidden="true">↗</span></a></div>
   {{ if and $data (eq $data.status "ready") }}

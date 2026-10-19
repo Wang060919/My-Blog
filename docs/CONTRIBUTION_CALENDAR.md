@@ -2,7 +2,8 @@
 
 ## 当前交付状态
 
-- 正式 data/github_contributions.json 是 unavailable：尚未取得可验证的真实贡献快照，首页显示诚实空态和 GitHub 链接。
+- 正式 data/github_contributions.json 已接入官方真实快照：2026-10-19 17:53:08 UTC 抓取，2025-10-20 至 2026-10-19 共 379 次贡献、42 个活跃日。来自同仓库 Actions 内置只读 token，未新增凭据。
+- 缺失数据时显示诚实空态和 GitHub 链接。
 - npm run preview:contributions 使用 tests/fixtures/contributions-example.json 构建到 .dev-public/contribution-example。页面醒目标注“示例数据”，生产文件不会被替换。
 - 用本地静态 HTTP 服务打开该输出即可看效果。示例构建复用当前工具链，临时配置自动清理。
 - 此功能通过独立分支和草稿 PR 审阅；未合并生产，未创建凭据或启用定时任务。
@@ -21,7 +22,7 @@
 
 ## 最小权限接入建议（尚未执行）
 
-优先试用 GitHub Actions 自带的短期 GITHUB_TOKEN，权限仅 contents: read，手动触发一次官方 GraphQL 请求。GitHub 官方确认此 token 可用于 API；是否允许该仓库当前设置下读取此用户的 contributionCalendar，仍需实际只读验证，不应预先承诺成功。如果 API 拒绝，保持回退，不自动扩权、不创建 PAT。
+优先试用 GitHub Actions 自带的短期 GITHUB_TOKEN，权限仅 contents: read，手动触发一次官方 GraphQL 请求。GitHub 官方确认此 token 可用于 API；2026-10-19 已在本仓库实际验证可读取此用户的 contributionCalendar，成功导出真实快照。如果 API 拒绝，保持回退，不自动扩权、不创建 PAT。
 
 已授权的一次性探测工作流仅在指定同仓库功能分支 PR 首次打开时触发，使用 checkout、Node 22、更新脚本，成功后仅把 data/github_contributions.json 作为保留 3 天的构建产物提供复核。后续 synchronize 不重复探测。不要自动提交到仓库：任何分支推送都可能触发 Cloudflare 预览。取得真实快照后先复核数值，再另行批准发布或构建接入。
 
@@ -43,3 +44,5 @@
 - npm test 包括数据校验；npm run ci 包括原有搜索/动效/主题测试、贡献测试、生产构建和验证。
 
 生产验收入口是 npm run build / npm run ci。直接运行 Hugo 或普通 npm preview 不替代这一步，也不能证明快照通过生产校验。
+
+来源审计：GitHub Actions run 39297874494，artifact 12209890568，ZIP SHA256 0e3006f558054a63691352cab628e8d695449cc81fd182b463685a36bd754250。
