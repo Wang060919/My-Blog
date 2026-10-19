@@ -43,7 +43,7 @@
   .project-card.ai-chat .project-card-visual { left: 30%; top: 210px; width: 390px; transform: perspective(1200px) rotateY(-4deg); }
   .project-card .round-arrow { position: absolute; right: 30px; top: 30px; margin: 0; }
   .project-card.vanishtrans .round-arrow { position: static; margin-top: 12px; }
-  .project-card .visual-caption, .project-card.ai-chat .visual-caption { color: #5f645f; }
+  .project-card .visual-caption, .project-card.ai-chat .visual-caption { color: #5f645f; background: color-mix(in srgb, var(--paper) 94%, transparent); padding: 2px 6px; border-radius: 3px; font-size: 11px; line-height: 1.5; }
   .project-grid[data-filtered="true"] { grid-auto-rows: auto; }
   .project-grid[data-filtered="true"] .project-card.vanishtrans {
     height: 420px;
