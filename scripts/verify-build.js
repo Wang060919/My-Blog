@@ -7,6 +7,13 @@ const read = (file) => fs.readFileSync(path.join(output, file), 'utf8');
 const sitemap = read('sitemap.xml');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const home = read('index.html');
+const verifyLight = (html, route) => {
+  assert.match(html, /<html\b[^>]*\bdata-bs-theme=["']?light["'\s>]/, `Page must start light before JavaScript: ${route}`);
+  assert.match(html, /document\.documentElement\.dataset\.bsTheme\s*=\s*["']light["']/, `Missing first-paint light bootstrap: ${route}`);
+  assert.ok(!/<(?:button|a)\b[^>]*(?:theme-toggle|data-bs-theme-value)/.test(html), `Unexpected theme control: ${route}`);
+};
+verifyLight(home, '/');
+verifyLight(read('404.html'), '404.html');
 const canonical = home.match(/<link\b[^>]*rel=["']?canonical["']?[^>]*href=["']?([^"'\s>]+)/)?.[1];
 assert.ok(canonical, 'Homepage canonical URL is missing');
 const origin = new URL(canonical).origin;
@@ -28,6 +35,7 @@ for (const article of articles) {
   const slug = frontMatter[2].match(/^slug\s*[:=]\s*["']?([^\r\n"']+)/m)?.[1].trim() || article.name;
   const relative = `blog/${slug}/`;
   const html = read(`${relative}index.html`);
+  verifyLight(html, relative);
   assert.ok(locations.includes(`${origin}/${relative}`), `Sitemap is missing ${relative}`);
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `Expected one H1: ${relative}`);
   const hasDiagram = /class=["']?mermaid["'\s>]/.test(html);
@@ -67,6 +75,7 @@ assert.equal(sources.size, 16, 'Expected redirects with and without trailing sla
 const personalRoutes = ['projects', 'projects/vanishtrans', 'projects/esp32-lab', 'projects/ai-chat', 'blog', 'about', 'docs', 'archives', 'tags', 'categories', 'search'];
 for (const route of personalRoutes) {
   const html = read(`${route}/index.html`);
+  verifyLight(html, route);
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `Expected one H1: ${route}`);
   assert.ok(html.includes('class=site-header') || html.includes('class="site-header"'), `Missing shared navigation: ${route}`);
 }
@@ -110,3 +119,13 @@ assert.ok(css.includes('--card-muted') && css.includes('--footer-surface'), 'Mis
 assert.ok(css.includes('.copy-failed') && css.includes('--gh-btn-success') && css.includes('--gh-btn-error'), 'Missing copy feedback theme states');
 console.log(`Build verified: ${published} articles, ${locations.length} sitemap URLs, ${diagramPages} Mermaid page(s), 8 legacy URL mappings, copy button CSS, and 404.html.`);
 console.log(`Personal site verified: ${personalRoutes.length} routes, ${searchIndex.length} search entries, documentation state, and production interaction styles.`);
+console.log('Light-only shell verified: homepage, 404, articles and personal routes start light and contain no theme controls.');
+
+assert.ok(home.includes('data-hero-entry'), 'Missing scroll-owned selected-work heading');
+for (const token of ['--paper:#fcfaf8', '--ink:#26251e', '--radius-panel:6px', '--radius-control:999px']) {
+  assert.ok(css.replace(/\s+/g, '').includes(token), `Missing editorial token: ${token}`);
+}
+for (const selector of ['data-hero-entry', '--preview-tilt', '.project-grid:not([data-filtered=']) {
+  assert.ok(css.includes(selector), `Missing editorial state: ${selector}`);
+}
+console.log('Editorial surfaces verified: warm palette, responsive project grid and shared scroll entrance survive production pruning.');

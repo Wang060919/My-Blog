@@ -16,8 +16,8 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
 # Doks (@thulite/doks-core)
 [doks]
   # Color mode
-  colorMode = "auto" # auto (default), light or dark
-  colorModeToggler = true # true (default) or false (this setting is only relevant when colorMode = auto)
+  colorMode = "light" # Light-only presentation; dark styles remain available.
+  colorModeToggler = false # Hide theme controls in the fallback Doks header too.
 
   # Navbar
   navbarSticky = true # true (default) or false

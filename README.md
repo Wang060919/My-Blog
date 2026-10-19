@@ -2,6 +2,8 @@
 
 基于 Hugo、Doks 和 Bootstrap/SCSS 的静态个人网站，保留技术博客与 Cloudflare Pages 发布流程。
 
+当前页面统一使用浅色，暂时移除主题切换入口，保留暗色样式以便以后恢复。
+
 首页展示作品与最近文章；`/projects/`、`/blog/`、`/about/`、`/docs/`、`/archives/`、`/tags/`、`/categories/`、`/search/` 共用导航、排版和主题。文档尚无独立正文时显示真实空状态。作品资料与视觉素材的边界见 [改版维护说明](docs/REDESIGN_NOTES.md)。
 
 ## 本地开发
@@ -30,6 +32,10 @@ npm run verify
 `npm run check` 执行依赖更新查询、安全审计、生产构建及产物校验；发现漏洞、审计无法完成或验证失败时返回非零状态，不自动修改依赖。WSL/Linux 也可执行 `bash scripts/health-check.sh`。
 
 冷构建应在没有 `node_modules/`、`public/`、`resources/` 和 `hugo_stats.json` 的独立源码副本中运行上述安装、构建、验证命令。直接在原目录重新安装不等于冷构建。
+
+## 云端与 PR 自动检查
+
+Linux x64 云端可使用仓库固定的 Node/npm/Hugo 工具链，运行 `npm run setup:cloud`、`npm ci --include=dev --cache .cache/npm`、`npm run ci`。搜索、动效和浅色启动回归也可单独通过 `npm test` 运行。配置、权限范围和验证边界见 [云端构建说明](docs/CLOUD_SETUP.md)。
 
 ## Cloudflare Pages
 
@@ -90,7 +96,7 @@ categories: ["技术"]
 
 ## 主题升级
 
-自定义样式入口为 `assets/scss/common/_custom.scss`，其中保留原代码样式并导入 `_personal-site.scss`。`assets/js/site.js` 管理导航、主题、本地搜索、筛选和动效；`assets/js/custom.js` 管理单一代码复制按钮。`assets/js/mermaid-init.js` 固定图表版本并提供加载失败降级。
+自定义样式入口为 `assets/scss/common/_custom.scss`，其中保留原代码样式并导入 `_personal-site.scss`。`assets/js/site.js` 管理导航、浅色初始化、本地搜索、筛选和动效；`assets/js/custom.js` 管理单一代码复制按钮。`assets/js/mermaid-init.js` 固定图表版本并提供加载失败降级。
 
 当前页面外壳使用 `layouts/baseof.html`、`layouts/_partials/site/` 与分栏目模板，Doks 继续提供 SCSS、内容渲染和 SEO。不要同时启用主题旧的导航或搜索脚本，以免重复绑定事件。项目字段在 `content/projects/`；未来独立文档可加入 `content/docs/`，设置明确的 `title` 和 `slug` 后自动出现在文档树与搜索中。
 

@@ -62,6 +62,11 @@ function createDartSassShim(nativeSass) {
 const nativeSass = findNativeSass();
 const temporaryDirectories = [];
 const environment = { ...process.env };
+// Resolve only locked project packages, not host-global modules. A global NODE_PATH
+// can also make Hugo's permission-scoped Node resolver loop during PostCSS.
+delete environment.NODE_PATH;
+// Keep caches writable in isolated cloud workspaces without touching the home directory.
+environment.HUGO_CACHEDIR ||= path.resolve(__dirname, '..', '.cache', 'hugo');
 
 if (nativeSass) {
   const shimRoot = createDartSassShim(nativeSass);
@@ -75,7 +80,12 @@ if (nativeSass) {
   if (pathKey !== "PATH") delete environment.PATH;
 }
 
-const hugo = process.env.HUGO_BINARY || (process.platform === "win32" ? "hugo.exe" : "hugo");
+const root = path.resolve(__dirname, '..');
+const versionFile = path.join(root, '.hugo-version');
+const localHugo = fs.existsSync(versionFile)
+  ? path.join(root, '.tools', 'hugo', fs.readFileSync(versionFile, 'utf8').trim(), process.platform === 'win32' ? 'hugo.exe' : 'hugo')
+  : '';
+const hugo = process.env.HUGO_BINARY || (localHugo && fs.existsSync(localHugo) ? localHugo : (process.platform === 'win32' ? 'hugo.exe' : 'hugo'));
 const result = spawnSync(hugo, process.argv.slice(2), {
   env: environment,
   stdio: "inherit",

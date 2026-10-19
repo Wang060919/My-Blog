@@ -10,23 +10,8 @@ import { initHomeReveal } from './home-reveal.js';
   initHeroScroll(reduced);
   const assembly = initAssembly(reduced);
   initDisclosures(reduced);
-  const themeButton = document.querySelector('.theme-toggle');
-  const updateThemeLabel = () => themeButton?.setAttribute('aria-label', document.documentElement.dataset.bsTheme === 'dark' ? '切换浅色模式' : '切换深色模式');
-  if (themeButton) {
-    themeButton.hidden = false;
-    updateThemeLabel();
-    themeButton.addEventListener('click', () => {
-      const theme = document.documentElement.dataset.bsTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.bsTheme = theme;
-      try { localStorage.setItem('wang-theme', theme); } catch (_) {}
-      document.dispatchEvent(new Event('themeChanged'));
-      updateThemeLabel();
-    });
-  }
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    let preference; try { preference = localStorage.getItem('wang-theme'); } catch (_) {}
-    if (!preference) { document.documentElement.dataset.bsTheme = event.matches ? 'dark' : 'light'; document.dispatchEvent(new Event('themeChanged')); updateThemeLabel(); }
-  });
+  // Light-only UI: ignore saved/system dark preferences without changing storage.
+  document.documentElement.dataset.bsTheme = 'light';
 
   const navigation=document.querySelector('.desktop-nav');
   if(navigation){
@@ -187,6 +172,7 @@ import { initHomeReveal } from './home-reveal.js';
     const form = widget.querySelector('form'), input = widget.querySelector('input'), results = widget.querySelector('.search-results'), status = widget.querySelector('.search-status'), retry = widget.querySelector('.search-retry');
     let selected = -1, generation = 0, timer;
     const render = async () => {
+      clearTimeout(timer);
       const run = ++generation; const query = input.value.trim();
       results.replaceChildren(); selected = -1; retry.hidden = true; status.textContent = '正在加载搜索…';
       try {
@@ -216,13 +202,20 @@ import { initHomeReveal } from './home-reveal.js';
         results.append(links);
       }
     };
-    input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(render,110); });
+    input.addEventListener('input', () => {
+      // Invalidate old requests and keyboard choices before the debounce expires.
+      ++generation; selected = -1; results.replaceChildren(); retry.hidden = true;
+      status.textContent = '正在搜索…';
+      clearTimeout(timer); timer = setTimeout(render,110);
+    });
     form.addEventListener('reset', () => { clearTimeout(timer); setTimeout(() => { input.value = ''; render(); input.focus(); },0); });
     form.addEventListener('submit', e => { e.preventDefault(); const links = results.querySelectorAll('a'); if (selected >= 0 && links[selected]) links[selected].click(); else if (input.value.trim()) render(); });
     input.addEventListener('keydown', e => {
       if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
       const links = Array.from(results.querySelectorAll('a')); if (!links.length) return;
-      e.preventDefault(); selected = (selected + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
+      e.preventDefault();
+      selected = selected < 0 ? (e.key === 'ArrowDown' ? 0 : links.length - 1)
+        : (selected + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
       links.forEach((link,i) => { link.toggleAttribute('data-selected',i === selected); });
       links[selected].scrollIntoView({block:'nearest'}); status.textContent = `已选择：${links[selected].querySelector('span')?.textContent || links[selected].textContent}`;
     });

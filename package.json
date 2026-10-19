@@ -9,7 +9,10 @@
     "build": "node scripts/hugo-runner.js --environment production --minify --gc --cleanDestinationDir",
     "preview": "node scripts/hugo-runner.js server --environment production --navigateToChanged --destination .dev-public",
     "check": "node scripts/health-check.js",
-    "verify": "node scripts/verify-build.js"
+    "verify": "node scripts/verify-build.js",
+    "setup:cloud": "node scripts/setup-cloud.js",
+    "test": "node scripts/test-search.js && node scripts/test-motion.js && node scripts/test-theme.js",
+    "ci": "npm test && npm run build && npm run verify"
   },
   "dependencies": {
     "@tabler/icons": "^3.36.1",
@@ -29,5 +32,6 @@
     "postcss": "8.5.26",
     "postcss-cli": "11.0.1",
     "sass-embedded": "^1.103.1"
-  }
+  },
+  "packageManager": "npm@11.9.0"
 }
