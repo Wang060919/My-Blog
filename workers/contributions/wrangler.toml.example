@@ -1,0 +1,15 @@
+# Template only. Copy to wrangler.toml after reviewing deployment permissions.
+name = "wang-contributions"
+main = "index.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+[vars]
+# Exact site origins, no paths, no wildcards; fill verified production/preview origins.
+ALLOWED_ORIGINS = ""
+[[kv_namespaces]]
+binding = "CONTRIBUTIONS"
+id = "REPLACE_WITH_USER_CREATED_NAMESPACE_ID"
+[triggers]
+# UTC 16:00 = next-day Beijing 00:00; actual execution may be delayed.
+crons = ["0 16 * * *"]
+# GITHUB_TOKEN must be entered by the user as a Cloudflare Secret, never here.

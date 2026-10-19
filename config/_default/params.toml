@@ -145,3 +145,7 @@ mathEngine = "KaTeX" # "KaTeX" (default) or "MathJax"
   newsArticle = []
   blogPosting = ["posts"]
   product = []
+
+# Optional verified Worker URL. Empty means static snapshot only.
+[contributions]
+  endpoint = ""

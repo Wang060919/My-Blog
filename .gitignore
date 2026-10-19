@@ -38,3 +38,8 @@ hugo_stats.json
 # Reproducible cloud toolchain and caches
 .tools/
 .cache/
+
+# User-managed Worker deployment settings and secrets
+workers/**/wrangler.toml
+workers/**/.dev.vars*
+workers/**/.env*

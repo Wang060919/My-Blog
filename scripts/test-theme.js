@@ -32,7 +32,7 @@ for (const scenario of [
     const context = {
       document:{documentElement:{dataset},querySelector:()=>null,dispatchEvent(){}},
       matchMedia(query){if(query.includes('prefers-color-scheme'))colorQueries++;return{matches:query.includes('prefers-color-scheme')&&scenario.systemDark,addEventListener(type,callback){if(query.includes('prefers-color-scheme'))listeners.push(callback);}};},
-      initHomeReveal(){},initHeroScroll(){},initDisclosures(){},initAssembly(){return{};},Event:class{},
+      initContributions(){},initHomeReveal(){},initHeroScroll(){},initDisclosures(){},initAssembly(){return{};},Event:class{},
     };
     if(!scenario.absent)context.localStorage={getItem(){reads++;if(scenario.blocked)throw new Error('Storage blocked');return scenario.saved;},setItem(){writes++;},removeItem(){writes++;},clear(){writes++;}};
     vm.runInNewContext(bootstrap,context);

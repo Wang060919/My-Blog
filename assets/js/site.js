@@ -1,3 +1,4 @@
+import { initContributions } from './contributions.js';
 import { initWaves } from './waves.js';
 import { initAssembly } from './assembly.js';
 import { initDisclosures } from './disclosures.js';
@@ -13,6 +14,7 @@ import { initHomeReveal } from './home-reveal.js';
   // Light-only UI: ignore saved/system dark preferences without changing storage.
   document.documentElement.dataset.bsTheme = 'light';
 
+  initContributions(reduced);
   const navigation=document.querySelector('.desktop-nav');
   if(navigation){
     const current=navigation.querySelector('[aria-current]');

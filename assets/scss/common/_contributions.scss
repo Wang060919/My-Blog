@@ -1,0 +1,52 @@
+.personal-site .contribution-section {
+  --contribution-zero: #e9e7e1;
+  --contribution-cell: clamp(13px, 1.2vw, 17px);
+  .contribution-card { padding: 30px 32px 22px; background: #f5f3ed; border: 1px solid #e8e5dc; border-radius: 6px; }
+  .contribution-summary, .contribution-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .contribution-summary { margin-bottom: 24px; color: #68675f; font-size: 13px; }
+  p { margin: 0; }
+  .contribution-summary p:first-child { font-size: 14px; }
+  .contribution-summary strong { font-size: 21px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .contribution-summary span { margin: 0 12px; color: #8c8b84; }
+  .contribution-scroll { overflow-x: auto; overscroll-behavior-x: contain; padding: 4px 3px 12px; scrollbar-width: thin; scrollbar-color: #cccac2 transparent; }
+  .contribution-calendar { display: flex; gap: 3px; width: max-content; min-width: max-content; }
+  .contribution-week { flex: 0 0 var(--contribution-cell); display: grid; grid-template-rows: 22px repeat(7, var(--contribution-cell)); gap: 3px; }
+  .contribution-month { font-size: 10px; color: #68675f; white-space: nowrap; width: 13px; overflow: visible; }
+  .contribution-day, .contribution-blank, .contribution-legend i { display: block; border: 0; padding: 0; height: var(--contribution-cell); min-width: var(--contribution-cell); border-radius: 2px; }
+  [data-level="0"] { background: var(--contribution-zero); }
+  [data-level="1"] { background: hsl(217 70% 72%); }
+  [data-level="2"] { background: hsl(217 70% 64%); }
+  [data-level="3"] { background: hsl(217 70% 56%); }
+  [data-level="4"] { background: hsl(217 70% 48%); }
+  .contribution-day { cursor: pointer; touch-action: pan-x pan-y; }
+  .contribution-day:hover, .contribution-day:focus-visible, .contribution-day[data-selected] { outline: 2px solid #334d70; outline-offset: 1px; position: relative; z-index: 1; }
+  .contribution-bottom { min-height: 32px; margin-top: 8px; font-size: 12px; color: #52554f; font-variant-numeric: tabular-nums; }
+  .contribution-legend { display: flex; gap: 3px; align-items: center; }
+  .contribution-legend i { height: 13px; min-width: 13px; }
+  .contribution-legend span { margin-inline: 5px; font-size: 10px; }
+  .contribution-date-label { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #6e7068; margin-top: 12px; }
+  .contribution-date-label input { min-height: 32px; padding: 3px 8px; border: 1px solid #d1cfc6; background: transparent; color: #52554f; border-radius: 3px; font-size: 12px; }
+  .contribution-help, .contribution-source { color: #6e7068; font-size: 11px; line-height: 1.8; }
+  .contribution-help { margin-top: 9px; }
+  .contribution-source { margin-top: 2px; }
+  .contribution-notice { padding-bottom: 16px; color: #765e32; font-size: 12px; }
+  .contribution-empty { display: flex; align-items: center; gap: 24px; min-height: 158px; }
+  .contribution-empty-mark { font-size: 42px; color: #638ac3; }
+  .contribution-empty p:first-child { font-size: 18px; margin-bottom: 10px; }
+  .contribution-empty p:last-child { color: #68675f; font-size: 13px; }
+}
+@media (max-width: 600px) {
+  .personal-site .contribution-section {
+    .section-heading { align-items: flex-start; gap: 18px; flex-direction: column; }
+    .contribution-card { padding: 22px 17px 18px; }
+    .contribution-summary { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .contribution-calendar { min-width: max-content; }
+    .contribution-week { flex-basis: 21px; grid-template-rows: 22px repeat(7, 21px); }
+    .contribution-day, .contribution-blank { height: 21px; min-width: 21px; }
+    .contribution-bottom { align-items: flex-start; flex-direction: column; gap: 10px; }
+    .contribution-empty { align-items: flex-start; gap: 15px; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .personal-site .contribution-section, .personal-site .contribution-week { animation: none !important; transition: none !important; }
+}

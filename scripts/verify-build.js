@@ -129,3 +129,10 @@ for (const selector of ['data-hero-entry', '--preview-tilt', '.project-grid:not(
   assert.ok(css.includes(selector), `Missing editorial state: ${selector}`);
 }
 console.log('Editorial surfaces verified: warm palette, responsive project grid and shared scroll entrance survive production pruning.');
+
+assert.ok(home.includes('id=building') || home.includes('id="building"'), 'Missing contribution section');
+for (const selector of ['contribution-calendar', 'contribution-day', 'data-level', 'contribution-date-label']) {
+  assert.ok(css.includes(selector), `Missing contribution production style: ${selector}`);
+}
+assert.ok(home.indexOf('id=building') > home.indexOf('id=selected-work'), 'Contributions must follow selected work');
+console.log('Contribution section verified: production styles and selected-work placement.');

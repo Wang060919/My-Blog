@@ -1,0 +1,23 @@
+{{ $data := site.Data.github_contributions }}
+{{ $ready := and $data (eq $data.status "ready") }}
+<section id="building" class="shell home-section contribution-section" aria-labelledby="building-title" data-contributions data-contributions-endpoint="{{ site.Params.contributions.endpoint | default "" }}">
+  <div class="section-heading"><div><p class="eyebrow">02 / 持续构建</p><h2 id="building-title">把想法，写进每一天。</h2></div><a class="text-link" href="https://github.com/Wang060919">@Wang060919 <span aria-hidden="true">↗</span></a></div>
+  {{ $stale := false }}{{ if $ready }}{{ $stale = gt (sub now.Unix (time.AsTime $data.fetchedAt).Unix) 604800 }}{{ end }}
+  <div class="contribution-card" data-snapshot-time="{{ $data.fetchedAt }}"{{ if not $ready }} hidden{{ end }}>
+    {{ if $data.example }}<p class="contribution-notice">示例数据 · 仅展示日历效果，不代表 Wang 的真实贡献</p>{{ end }}
+    <div class="contribution-summary"><p><strong data-contribution-total>{{ $data.total }}</strong> {{ if $data.example }}次示例贡献{{ else if $stale }}次快照贡献{{ else }}次近一年贡献（快照）{{ end }}<span>·</span><strong data-contribution-active>{{ $data.activeDays }}</strong> 个活跃日</p><p>更新于 <time datetime="{{ $data.fetchedAt }}">{{ if $ready }}{{ time.Format "2006.01.02" $data.fetchedAt }}{{ end }}</time> UTC</p></div>
+    <p class="contribution-notice" data-stale-notice{{ if not $stale }} hidden{{ end }}>快照已超过 7 天，暂未更新。</p>
+    <div class="contribution-scroll" data-calendar-scroll>
+      <div class="contribution-calendar" role="group" aria-label="每日 GitHub 贡献日历" aria-describedby="contribution-help">
+      {{ range $i, $week := $data.weeks }}<div class="contribution-week" style="--week:{{ $i }}"><span class="contribution-month" aria-hidden="true">{{ $week.month }}</span>{{ range $week.days }}{{ if . }}<button type="button" class="contribution-day" data-level="{{ .level }}" data-date="{{ .date }}" data-count="{{ .count }}" tabindex="{{ if eq .date $data.to }}0{{ else }}-1{{ end }}" aria-label="{{ .date }}，{{ .count }} 次贡献" title="{{ .date }} · {{ .count }} 次贡献"></button>{{ else }}<span class="contribution-blank" aria-hidden="true"></span>{{ end }}{{ end }}</div>{{ end }}
+      </div>
+    </div>
+    <div class="contribution-bottom"><p id="contribution-detail" role="status" aria-live="polite" aria-atomic="true">{{ $data.from }} — {{ $data.to }}</p><div class="contribution-legend" aria-label="贡献数量从少到多"><span>少</span>{{ range seq 0 4 }}<i data-level="{{ . }}" aria-hidden="true"></i>{{ end }}<span>多</span></div></div>
+    <label class="contribution-date-label">查看日期 <input type="date" data-calendar-date min="{{ $data.from }}" max="{{ $data.to }}" value="{{ $data.to }}" aria-controls="contribution-detail"></label>
+    <p id="contribution-help" class="contribution-help">滑动查看全年 · 点按查看日期 · 键盘方向键切换，Home / End 跳至首尾</p>
+    <p class="contribution-source">{{ if $data.example }}示例快照{{ else }}来源：<a href="https://github.com/Wang060919">GitHub contributionCalendar</a>{{ end }} · 贡献包含提交、议题、拉取请求等，不等同于 commit 数。</p>
+  </div>
+  {{ if not $ready }}
+  <div class="contribution-card contribution-empty" data-contribution-empty><span class="contribution-empty-mark" aria-hidden="true">↳</span><div><p>每一次投入，都值得留下痕迹。</p><p>贡献日历暂未接入真实数据。<a href="https://github.com/Wang060919">去 GitHub 看看最新动态 ↗</a></p></div></div>
+  {{ end }}
+</section>
